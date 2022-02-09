@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
-import { RefreshToken } from "./RefreshToken";
+import { RefreshToken } from "./refreshToken.model";
 
 @Table({ tableName: "user", underscored: true })
 class User extends Model {

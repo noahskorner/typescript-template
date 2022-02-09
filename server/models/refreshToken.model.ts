@@ -6,7 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from "sequelize-typescript";
-import { User } from "./User.model";
+import { User } from "./user.model";
 
 @Table({ tableName: "refresh_token", underscored: true })
 class RefreshToken extends Model {

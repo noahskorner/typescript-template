@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import db from "./models";
+import userRoutes from "./routes/user.route";
 dotenv.config();
 
 // MIDDLEWARE
@@ -12,11 +13,14 @@ app.use(
   })
 );
 
+// ROUTES
+app.use("/user", userRoutes);
+
 // DATABASE
-//db.sequelize.sync();
-db.sequelize.sync({ force: true }).then(async () => {
-  console.log("Drop and re-sync db...");
-});
+db.sequelize.sync();
+// db.sequelize.sync({ force: true }).then(async () => {
+//   console.log("Drop and re-sync db...");
+// });
 
 // START SERVER
 const port = process.env.PORT ? process.env.PORT : 3001;
