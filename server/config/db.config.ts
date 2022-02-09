@@ -1,21 +1,28 @@
+import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 dotenv.config();
 
-const config = process.env.NODE_ENV === "DEVELOPMENT"
-  ? {
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      host: process.env.HOST,
-      port: process.env.DB_PORT,
-      database: process.env.DATABASE,
-      dialect: "postgres",
-    }
-  : {
-      connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false,
-      },
-      dialect: "postgres",
-    };
+const sequelize =
+  process.env.NODE_ENV === "DEVELOPMENT"
+    ? new Sequelize(
+        process.env.DATABASE,
+        process.env.USER,
+        process.env.PASSWORD,
+        {
+          host: process.env.HOST,
+          dialect: "postgres",
+          logging: false,
+        }
+      )
+    : new Sequelize(process.env.CONNECTION_STRING, {
+        dialect: "postgres",
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        },
+        logging: false,
+      });
 
-module.exports = config;
+export default sequelize;
