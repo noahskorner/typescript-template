@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import db from "./models";
 import userRoutes from "./routes/user.route";
+import dotenv from "dotenv";
 dotenv.config();
 
 // MIDDLEWARE
 const app = express();
+app.use(express.json());
 app.use(
   cors({
     origin: ["http://localhost:3000"],

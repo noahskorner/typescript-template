@@ -1,11 +1,23 @@
+import { validationResult } from "express-validator";
 import { User } from "../models/user.model";
 
-const register = async (req, res) => {
-  await User.create({
-    email: "noahskorner@gmail.com",
-  });
+class UserController {
+  public register = async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()){
+      return res.status(400).json(err);
+    }
+    
+    const { email, password1 } = req.body;
 
-  return res.sendStatus(200);
-};
+    await User.create({
+      email: email,
+      password: password1,
+    });
 
-export { register };
+    return res.sendStatus(200);
+  };
+}
+const userController = new UserController();
+
+export { userController };
