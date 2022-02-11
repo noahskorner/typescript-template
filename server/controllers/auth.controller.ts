@@ -1,4 +1,4 @@
-export default class AuthController {
+class AuthController {
   public login = async (req, res) => {
     return res.sendStatus(200);
   };
@@ -9,3 +9,6 @@ export default class AuthController {
     return res.sendStatus(200);
   };
 }
+const authController = new AuthController();
+
+export { authController };

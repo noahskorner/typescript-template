@@ -5,9 +5,12 @@ import { RefreshToken } from "./refreshToken.model";
 class User extends Model {
   @Column(DataType.STRING)
   email: string;
-  
+
   @Column(DataType.STRING)
   password: string;
+
+  @Column(DataType.BOOLEAN)
+  isVerified: boolean = true;
 
   @HasMany(() => RefreshToken)
   refreshTokens: RefreshToken[];

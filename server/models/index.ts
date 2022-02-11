@@ -6,9 +6,10 @@ import { RefreshToken } from "./refreshToken.model";
 sequelize.addModels([User, RefreshToken]);
 
 const db = {
-  Sequelize: Sequelize,
-  sequelize: sequelize,
-  User: User,
+  Sequelize,
+  sequelize,
+  User,
+  RefreshToken,
 };
 
 export default db;
