@@ -1,4 +1,10 @@
-import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+} from "sequelize-typescript";
 import { RefreshToken } from "./refreshToken.model";
 
 @Table({ tableName: "user", underscored: true })
@@ -10,7 +16,7 @@ class User extends Model {
   password: string;
 
   @Column(DataType.BOOLEAN)
-  isVerified: boolean = false;
+  isVerified: boolean;
 
   @Column(DataType.STRING)
   verificationToken: string;

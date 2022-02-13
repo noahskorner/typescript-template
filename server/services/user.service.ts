@@ -1,17 +1,26 @@
-import { genSalt, hash } from "bcrypt";
+import { genSalt, hash, compare } from "bcrypt";
 import { randomBytes } from "crypto";
+import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { mailService } from "./mail.service";
+import dotenv from "dotenv";
+import { RefreshToken } from "../models/refreshToken.model";
+dotenv.config();
+
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 class UserService {
-  public findUserByEmail = async (email): Promise<User | null> => {
+  public findUserByEmail = async (email: string): Promise<User | null> => {
     const user = await User.findOne({ where: { email } });
 
     return user;
   };
 
   public findUserById = async (id): Promise<User | null> => {
-    const user = await User.findByPk(id);
+    const user = await User.scope("full").findByPk(id);
 
     return user;
   };
@@ -42,6 +51,40 @@ class UserService {
     await this.sendVerificationEmail(user);
   };
 
+  public checkPassword = async (
+    user: User,
+    password: string
+  ): Promise<boolean> => {
+    return await compare(password, user.password);
+  };
+
+  public generateAuthResponse = async (user: User) => {
+    const accessToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
+      }
+    );
+
+    const refreshToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: process.env.REFRESH_TOKEN_EXPIRATION,
+      }
+    );
+
+    // delete all old tokens, currently user can only be logged into one device at a time.
+    // TO DO: Add device_ip property to refresh token, to allow multiple devices
+    await RefreshToken.destroy({
+      where: { userId: user.id },
+    });
+    await RefreshToken.create({ token: refreshToken, userId: user.id });
+
+    return { accessToken, refreshToken };
+  };
+
   private sendVerificationEmail = async (user: User) => {
     const mail = {
       from: "noahskorner@gmail.com",
@@ -55,4 +98,4 @@ class UserService {
 }
 const userService = new UserService();
 
-export { userService };
+export { userService, AuthResponse };
