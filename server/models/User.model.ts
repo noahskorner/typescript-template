@@ -10,7 +10,10 @@ class User extends Model {
   password: string;
 
   @Column(DataType.BOOLEAN)
-  isVerified: boolean = true;
+  isVerified: boolean = false;
+
+  @Column(DataType.STRING)
+  verificationToken: string;
 
   @HasMany(() => RefreshToken)
   refreshTokens: RefreshToken[];

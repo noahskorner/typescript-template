@@ -1,11 +1,23 @@
+import { userService } from "../services/user.service";
+
 class AuthController {
-  public login = async (req, res) => {
-    return res.sendStatus(200);
-  };
-  public refreshToken = async (req, res) => {
-    return res.sendStatus(200);
-  };
-  public logout = async (req, res) => {
+  public verifyEmail = async (req, res) => {
+    const userId = req.params.id;
+    const verificationToken = req.params.token;
+
+    const user = await userService.findUserByVerificationToken(
+      userId,
+      verificationToken
+    );
+
+    if (!user || user.isVerified) {
+      return res.sendStatus(400);
+    }
+
+    await user.update({
+      isVerified: true,
+    });
+
     return res.sendStatus(200);
   };
 }

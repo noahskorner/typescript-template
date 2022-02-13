@@ -9,7 +9,7 @@ const sequelize =
         process.env.USER,
         process.env.PASSWORD,
         {
-          host: process.env.HOST,
+          host: process.env.DB_HOST,
           dialect: "postgres",
           logging: false,
         }

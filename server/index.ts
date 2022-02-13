@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import db from "./models";
 import userRoutes from "./routes/user.route";
+import authRoutes from "./routes/auth.route";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(
 
 // ROUTES
 app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
 
 // DATABASE
 db.sequelize.sync();
