@@ -1,9 +1,8 @@
 import express from "express";
 import cors from "cors";
 import db from "./models";
-import userRoutes from "./routes/user.route";
-import authRoutes from "./routes/auth.route";
 import dotenv from "dotenv";
+import router from "./routes";
 dotenv.config();
 
 // MIDDLEWARE
@@ -14,10 +13,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
-
-// ROUTES
-app.use("/user", userRoutes);
-app.use("/auth", authRoutes);
+app.use(router);
 
 // DATABASE
 db.sequelize.sync();

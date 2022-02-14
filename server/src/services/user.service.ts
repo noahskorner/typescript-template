@@ -66,7 +66,6 @@ class UserService {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
       }
     );
-
     const refreshToken = jwt.sign(
       { id: user.id, email: user.email },
       process.env.REFRESH_TOKEN_SECRET,
@@ -75,8 +74,6 @@ class UserService {
       }
     );
 
-    // delete all old tokens, currently user can only be logged into one device at a time.
-    // TO DO: Add device_ip property to refresh token, to allow multiple devices
     await RefreshToken.destroy({
       where: { userId: user.id },
     });
