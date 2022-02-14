@@ -3,9 +3,7 @@ import { randomBytes } from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { mailService } from "./mail.service";
-import dotenv from "dotenv";
 import { RefreshToken } from "../models/refreshToken.model";
-dotenv.config();
 
 interface AuthResponse {
   accessToken: string;
@@ -87,7 +85,7 @@ class UserService {
       from: "noahskorner@gmail.com",
       to: user.email,
       subject: "Welcome to typescript-template!",
-      text: `${process.env.HOST}/auth/verify-email/${user.id}/${user.verificationToken}`,
+      text: `${process.env.HOST}/user/verify-email/${user.id}/${user.verificationToken}`,
     };
 
     await mailService.sendMail(mail);

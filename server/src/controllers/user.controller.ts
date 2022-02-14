@@ -1,7 +1,5 @@
 import { validationResult } from "express-validator";
 import { userService } from "../services/user.service";
-import dotenv from "dotenv";
-dotenv.config();
 
 class UserController {
   public register = async (req, res) => {
@@ -12,6 +10,26 @@ class UserController {
 
     const { email, password1 } = req.body;
     await userService.createUser(email, password1);
+
+    return res.sendStatus(200);
+  };
+
+  public verifyEmail = async (req, res) => {
+    const userId = req.params.id;
+    const verificationToken = req.params.token;
+
+    const user = await userService.findUserByVerificationToken(
+      userId,
+      verificationToken
+    );
+
+    if (!user || user.isVerified) {
+      return res.sendStatus(400);
+    }
+
+    await user.update({
+      isVerified: true,
+    });
 
     return res.sendStatus(200);
   };

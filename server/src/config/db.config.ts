@@ -1,6 +1,4 @@
 import { Sequelize } from "sequelize-typescript";
-import dotenv from "dotenv";
-dotenv.config();
 
 const sequelize =
   process.env.NODE_ENV === "DEVELOPMENT"

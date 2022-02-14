@@ -23,11 +23,11 @@ class AuthController {
     const { email, password } = req.body;
 
     const user = await userService.findUserByEmail(email);
-    if (!user) return res.status(400).json(userNotFoundReponse);
+    if (!user) return res.status(401).json(userNotFoundReponse);
     if (!(await userService.checkPassword(user, password))) {
-      return res.status(400).json(userNotFoundReponse);
+      return res.status(401).json(userNotFoundReponse);
     }
-    if (!user.isVerified) return res.status(404).json(emailNotVerifiedResponse);
+    if (!user.isVerified) return res.status(401).json(emailNotVerifiedResponse);
 
     const authResponse = await userService.generateAuthResponse(user);
     return res.status(200).json(authResponse);
@@ -38,26 +38,6 @@ class AuthController {
   };
 
   public logout = async (req, res) => {
-    return res.sendStatus(200);
-  };
-
-  public verifyEmail = async (req, res) => {
-    const userId = req.params.id;
-    const verificationToken = req.params.token;
-
-    const user = await userService.findUserByVerificationToken(
-      userId,
-      verificationToken
-    );
-
-    if (!user || user.isVerified) {
-      return res.sendStatus(400);
-    }
-
-    await user.update({
-      isVerified: true,
-    });
-
     return res.sendStatus(200);
   };
 }

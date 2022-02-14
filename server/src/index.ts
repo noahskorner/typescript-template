@@ -1,9 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import db from "./models";
-import dotenv from "dotenv";
 import router from "./routes";
-dotenv.config();
 
 // MIDDLEWARE
 const app = express();
