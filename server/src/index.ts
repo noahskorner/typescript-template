@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import db from "./models";
 import router from "./routes";
+import errorHandler from "./middleware/errorHandler";
 
 // MIDDLEWARE
 const app = express();
@@ -15,6 +16,7 @@ app.use(
   })
 );
 app.use(router);
+app.use(errorHandler);
 
 // DATABASE
 db.sequelize.sync();

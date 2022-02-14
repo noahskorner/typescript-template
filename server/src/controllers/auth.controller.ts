@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { userService } from "../services/user.service";
 import { ErrorType } from "../types/global.types";
+import catchAsync from "../middleware/catchAsync";
 
 const emailNotVerifiedResponse: ErrorType[] = [
   {
@@ -14,7 +15,7 @@ const userNotFoundReponse: ErrorType[] = [
 ];
 
 class AuthController {
-  public login = async (req, res) => {
+  public login = catchAsync(async (req, res) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
       return res.status(400).json(err);
@@ -31,15 +32,15 @@ class AuthController {
 
     const authResponse = await userService.generateAuthResponse(user);
     return res.status(200).json(authResponse);
-  };
+  });
 
-  public refreshToken = async (req, res) => {
+  public refreshToken = catchAsync(async (req, res) => {
     return res.sendStatus(200);
-  };
+  });
 
-  public logout = async (req, res) => {
+  public logout = catchAsync(async (req, res) => {
     return res.sendStatus(200);
-  };
+  });
 }
 const authController = new AuthController();
 

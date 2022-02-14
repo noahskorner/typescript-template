@@ -57,20 +57,14 @@ class UserService {
   };
 
   public generateAuthResponse = async (user: User) => {
-    const accessToken = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
-      }
-    );
-    const refreshToken = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: process.env.REFRESH_TOKEN_EXPIRATION,
-      }
-    );
+    const payload = { id: user.id, email: user.email };
+    
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: 900,
+    });
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: "15 days",
+    });
 
     await RefreshToken.destroy({
       where: { userId: user.id },

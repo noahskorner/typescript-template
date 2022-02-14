@@ -1,6 +1,4 @@
-const authenticate = async (req, res, next) => {
-  const jwt = require("jsonwebtoken");
-const { UserRoles } = require("../models");
+import jwt from "jsonwebtoken";
 
 const authenticate = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -13,7 +11,6 @@ const authenticate = (req, res, next) => {
     req.user = user;
     next();
   });
-};
 };
 
 const authorize = async (permittedRoles) => {

@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 
 const sequelize =
-  process.env.NODE_ENV === "DEVELOPMENT"
+  process.env.NODE_ENV === "development"
     ? new Sequelize(
         process.env.DATABASE,
         process.env.USER,
