@@ -1,9 +1,10 @@
 import { validationResult } from "express-validator";
 import { userService } from "../services/user.service";
 import catchAsync from "../middleware/catchAsync";
+import { Request, Response } from "express";
 
 class UserController {
-  public register = catchAsync(async (req, res) => {
+  public register = catchAsync(async (req: Request, res: Response) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
       return res.status(400).json(err);
@@ -15,8 +16,8 @@ class UserController {
     return res.sendStatus(200);
   });
 
-  public verifyEmail = catchAsync(async (req, res) => {
-    const userId = req.params.id;
+  public verifyEmail = catchAsync(async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id);
     const verificationToken = req.params.token;
 
     const user = await userService.findUserByVerificationToken(
@@ -35,8 +36,8 @@ class UserController {
     return res.sendStatus(200);
   });
 
-  public getUser = catchAsync(async (req, res) => {
-    const userId = req.params.id;
+  public getUser = catchAsync(async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id);
 
     const user = await userService.findUserById(userId);
 

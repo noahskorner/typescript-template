@@ -1,4 +1,11 @@
-const errorHandler = (err, req, res, next) => {
+import { Errback, Response, NextFunction, Request } from "express";
+
+const errorHandler = (
+  err: Errback,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   console.log(err);
   res.sendStatus(500);
 };

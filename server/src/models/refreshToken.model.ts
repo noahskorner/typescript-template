@@ -11,13 +11,13 @@ import { User } from "./user.model";
 @Table({ tableName: "refresh_token", underscored: true })
 class RefreshToken extends Model {
   @Column(DataType.STRING)
-  token: string;
+  token!: string;
 
   @ForeignKey(() => User)
-  userId: number;
+  userId!: number;
 
   @BelongsTo(() => User)
-  user: User;
+  user!: User;
 }
 
 export { RefreshToken };

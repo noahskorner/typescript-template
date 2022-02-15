@@ -17,7 +17,7 @@ class UserService {
     return user;
   };
 
-  public findUserById = async (id): Promise<User | null> => {
+  public findUserById = async (id: number): Promise<User | null> => {
     const user = await User.findByPk(id);
 
     return user;
@@ -63,10 +63,10 @@ class UserService {
   ) => {
     const payload = { id, email, roles };
 
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET ?? '', {
       expiresIn: 900,
     });
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET ?? '', {
       expiresIn: "15 days",
     });
 

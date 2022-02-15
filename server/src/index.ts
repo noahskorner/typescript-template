@@ -6,6 +6,13 @@ import cors from "cors";
 import db from "./models";
 import router from "./routes";
 import errorHandler from "./middleware/errorHandler";
+import { RequestUser } from "./types/global";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    user?: RequestUser;
+  }
+}
 
 // MIDDLEWARE
 const app = express();

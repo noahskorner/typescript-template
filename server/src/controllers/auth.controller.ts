@@ -1,8 +1,8 @@
 import { validationResult } from "express-validator";
 import { userService } from "../services/user.service";
-import { ErrorType } from "../types/global.types";
-import jwt from "jsonwebtoken";
+import jwt, { VerifyErrors } from "jsonwebtoken";
 import catchAsync from "../middleware/catchAsync";
+import { Request, Response } from "express";
 
 const emailNotVerifiedResponse: ErrorType[] = [
   {
@@ -16,7 +16,7 @@ const userNotFoundResponse: ErrorType[] = [
 ];
 
 class AuthController {
-  public login = catchAsync(async (req, res) => {
+  public login = catchAsync(async (req: Request, res: Response) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
       return res.status(400).json(err);
@@ -39,7 +39,7 @@ class AuthController {
     return res.status(200).json(authResponse);
   });
 
-  public refreshToken = catchAsync(async (req, res) => {
+  public refreshToken = catchAsync(async (req: Request, res: Response) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
       return res.status(400).json(err);
@@ -54,8 +54,8 @@ class AuthController {
     // verify the token
     jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
-      async (error, user) => {
+      process.env.REFRESH_TOKEN_SECRET ?? "",
+      async (error: VerifyErrors | null, user: any) => {
         if (error) {
           console.log(error);
           return res.sendStatus(403);
@@ -72,8 +72,10 @@ class AuthController {
     );
   });
 
-  public logout = catchAsync(async (req, res) => {
-    const userId = req.user.id;
+  public logout = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) return res.sendStatus(401);
+
+    const userId = parseInt(req.user.id);
 
     await userService.logoutUser(userId);
 

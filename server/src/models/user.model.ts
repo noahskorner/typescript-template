@@ -4,23 +4,23 @@ import { RefreshToken } from "./refreshToken.model";
 @Table({ tableName: "user", underscored: true })
 class User extends Model {
   @Column(DataType.STRING)
-  email: string;
+  email!: string;
 
   @Column(DataType.STRING)
-  password: string;
+  password!: string;
 
   @Column(DataType.BOOLEAN)
-  isVerified: boolean;
+  isVerified!: boolean;
 
   @Column(DataType.STRING)
-  verificationToken: string;
+  verificationToken!: string;
 
   @HasMany(() => RefreshToken, {
     onDelete: "CASCADE",
   })
-  refreshTokens: RefreshToken[];
+  refreshTokens!: RefreshToken[];
 
-  roles: string[];
+  roles!: string[];
 }
 
 export { User };
