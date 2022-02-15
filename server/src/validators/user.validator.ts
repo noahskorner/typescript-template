@@ -11,7 +11,7 @@ class UserValidator {
       const user = await userService.findUserByEmail(value);
 
       if (user) {
-        return Promise.reject("User with that email already exists");
+        return Promise.reject("User with that email already exists.");
       }
       return true;
     }),

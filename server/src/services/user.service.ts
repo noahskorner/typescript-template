@@ -18,7 +18,7 @@ class UserService {
   };
 
   public findUserById = async (id): Promise<User | null> => {
-    const user = await User.scope("full").findByPk(id);
+    const user = await User.findByPk(id);
 
     return user;
   };
@@ -56,9 +56,13 @@ class UserService {
     return await compare(password, user.password);
   };
 
-  public generateAuthResponse = async (user: User) => {
-    const payload = { id: user.id, email: user.email };
-    
+  public generateAuthResponse = async (
+    id: string,
+    email: string,
+    roles: string[]
+  ) => {
+    const payload = { id, email, roles };
+
     const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: 900,
     });
@@ -67,11 +71,29 @@ class UserService {
     });
 
     await RefreshToken.destroy({
-      where: { userId: user.id },
+      where: { userId: id },
     });
-    await RefreshToken.create({ token: refreshToken, userId: user.id });
+    await RefreshToken.create({ token: refreshToken, userId: id });
 
     return { accessToken, refreshToken };
+  };
+
+  public getIsTokenActive = async (token: string): Promise<boolean> => {
+    const refreshToken = await RefreshToken.findOne({
+      where: {
+        token,
+      },
+    });
+
+    return refreshToken !== null;
+  };
+
+  public logoutUser = async (userId: number) => {
+    await RefreshToken.destroy({
+      where: {
+        userId,
+      },
+    });
   };
 
   private sendVerificationEmail = async (user: User) => {
