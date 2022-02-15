@@ -9,7 +9,7 @@ const emailNotVerifiedResponse: ErrorType[] = [
     msg: "Please verify your email before logging in.",
   },
 ];
-const userNotFoundReponse: ErrorType[] = [
+const userNotFoundResponse: ErrorType[] = [
   {
     msg: "Your email or password is incorrect",
   },
@@ -25,9 +25,9 @@ class AuthController {
     const { email, password } = req.body;
 
     const user = await userService.findUserByEmail(email);
-    if (!user) return res.status(401).json(userNotFoundReponse);
+    if (!user) return res.status(401).json(userNotFoundResponse);
     if (!(await userService.checkPassword(user, password))) {
-      return res.status(401).json(userNotFoundReponse);
+      return res.status(401).json(userNotFoundResponse);
     }
     if (!user.isVerified) return res.status(401).json(emailNotVerifiedResponse);
 
@@ -61,6 +61,7 @@ class AuthController {
           return res.sendStatus(403);
         }
 
+        // issue new tokens
         const authResponse = await userService.generateAuthResponse(
           user.id,
           user.email,
@@ -73,7 +74,7 @@ class AuthController {
 
   public logout = catchAsync(async (req, res) => {
     const userId = req.user.id;
-    
+
     await userService.logoutUser(userId);
 
     return res.sendStatus(200);
