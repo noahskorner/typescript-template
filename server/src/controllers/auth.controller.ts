@@ -3,17 +3,7 @@ import { userService } from "../services/user.service";
 import jwt, { VerifyErrors } from "jsonwebtoken";
 import catchAsync from "../middleware/catchAsync";
 import { Request, Response } from "express";
-
-const emailNotVerifiedResponse: ErrorType[] = [
-  {
-    msg: "Please verify your email before logging in.",
-  },
-];
-const userNotFoundResponse: ErrorType[] = [
-  {
-    msg: "Your email or password is incorrect",
-  },
-];
+import { userNotFound, emailNotVerified } from "../responses";
 
 class AuthController {
   public login = catchAsync(async (req: Request, res: Response) => {
@@ -25,11 +15,11 @@ class AuthController {
     const { email, password } = req.body;
 
     const user = await userService.findUserByEmail(email);
-    if (!user) return res.status(401).json(userNotFoundResponse);
+    if (!user) return res.status(401).json(userNotFound);
     if (!(await userService.checkPassword(user, password))) {
-      return res.status(401).json(userNotFoundResponse);
+      return res.status(401).json(userNotFound);
     }
-    if (!user.isVerified) return res.status(401).json(emailNotVerifiedResponse);
+    if (!user.isVerified) return res.status(401).json(emailNotVerified);
 
     const authResponse = await userService.generateAuthResponse(
       user.id,

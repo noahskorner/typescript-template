@@ -13,4 +13,4 @@ declare global {
   }
 }
 
-export { ErrorType, RequestUser };
+export { RequestUser };

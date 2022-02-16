@@ -6,9 +6,6 @@
     "rootDir": "./",
     "esModuleInterop": true,
     "strict": true,
-    "types": ["node"],
-    "paths": {
-      "*": ["./src/types/*.d.ts"]
-    },
+    "typeRoots": ["./src/@types", "./node_modules/@types"]
   }
 }
