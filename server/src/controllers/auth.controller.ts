@@ -17,10 +17,11 @@ class AuthController {
 
     const user = await userService.findUserByEmail(email);
     if (!user) return res.status(401).json(userNotFound);
-    if (!(await userService.checkPassword(user, password))) {
-      return res.status(401).json(userNotFound);
-    }
-    if (!user.isVerified) return res.status(401).json(emailNotVerified);
+
+    const validPassword = await userService.checkPassword(user, password);
+    if (!validPassword) return res.status(401).json(userNotFound);
+
+    if (!user.isVerified) return res.status(403).json(emailNotVerified);
 
     const authResponse = await userService.generateAuthResponse(
       user.id,
@@ -47,10 +48,7 @@ class AuthController {
       refreshToken,
       env.REFRESH_TOKEN_SECRET,
       async (error: VerifyErrors | null, user: any) => {
-        if (error) {
-          console.log(error);
-          return res.sendStatus(403);
-        }
+        if (error) return res.sendStatus(403);
 
         // issue new tokens
         const authResponse = await userService.generateAuthResponse(
@@ -67,7 +65,6 @@ class AuthController {
     if (!req.user) return res.sendStatus(401);
 
     const userId = parseInt(req.user.id);
-
     await userService.logoutUser(userId);
 
     return res.sendStatus(200);

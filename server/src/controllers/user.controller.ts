@@ -2,6 +2,9 @@ import { validationResult } from "express-validator";
 import { userService } from "../services/user.service";
 import catchAsync from "../middleware/catchAsync";
 import { Request, Response } from "express";
+import { resetPassword } from "../responses";
+import jwt, { VerifyErrors } from "jsonwebtoken";
+import env from "../config/env.config";
 
 class UserController {
   public register = catchAsync(async (req: Request, res: Response) => {
@@ -17,23 +20,35 @@ class UserController {
   });
 
   public verifyEmail = catchAsync(async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id);
     const verificationToken = req.params.token;
 
-    const user = await userService.findUserByVerificationToken(
-      userId,
-      verificationToken
+    jwt.verify(
+      verificationToken,
+      env.VERIFY_EMAIL_SECRET,
+      async (err: VerifyErrors | null, { email }: any) => {
+        if (err) return res.sendStatus(403);
+
+        userService
+          .findUserByVerificationToken(email, verificationToken)
+          .then((user) => {
+            if (!user || user.isVerified) {
+              return res.sendStatus(400);
+            }
+
+            userService
+              .updateIsVerified(user, true)
+              .then(() => {
+                return res.sendStatus(200);
+              })
+              .catch(() => {
+                return res.sendStatus(500);
+              });
+          })
+          .catch(() => {
+            return res.sendStatus(500);
+          });
+      }
     );
-
-    if (!user || user.isVerified) {
-      return res.sendStatus(400);
-    }
-
-    await user.update({
-      isVerified: true,
-    });
-
-    return res.sendStatus(200);
   });
 
   public getUser = catchAsync(async (req: Request, res: Response) => {
@@ -45,6 +60,61 @@ class UserController {
 
     return res.status(200).json(user);
   });
+
+  public resetPassword = catchAsync(async (req: Request, res: Response) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+      return res.status(400).json(err);
+    }
+
+    const { email } = req.body;
+    const user = await userService.findUserByEmail(email);
+    if (!user) return res.status(200).json(resetPassword);
+
+    await userService.resetPassword(user);
+
+    return res.status(200).json(resetPassword);
+  });
+
+  public confirmResetPassword = catchAsync(
+    async (req: Request, res: Response) => {
+      const err = validationResult(req);
+      if (!err.isEmpty()) {
+        return res.status(400).json(err);
+      }
+
+      const resetPasswordToken = req.params.token;
+      const { password1 } = req.body;
+
+      jwt.verify(
+        resetPasswordToken,
+        env.PASSWORD_RESET_SECRET,
+        async (err: VerifyErrors | null, { email }: any) => {
+          if (err) return res.sendStatus(403);
+
+          userService
+            .findUserByPasswordResetToken(email, resetPasswordToken)
+            .then((user) => {
+              if (!user) {
+                return res.sendStatus(400);
+              }
+
+              userService
+                .updatePassword(user, password1)
+                .then(() => {
+                  return res.sendStatus(200);
+                })
+                .catch(() => {
+                  return res.sendStatus(500);
+                });
+            })
+            .catch(() => {
+              return res.sendStatus(500);
+            });
+        }
+      );
+    }
+  );
 }
 const userController = new UserController();
 

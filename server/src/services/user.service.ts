@@ -1,5 +1,4 @@
 import { genSalt, hash, compare } from "bcrypt";
-import { randomBytes } from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { mailService } from "./mail.service";
@@ -25,13 +24,27 @@ class UserService {
   };
 
   public findUserByVerificationToken = async (
-    id: number,
+    email: string,
     verificationToken: string
   ): Promise<User | null> => {
     const user = await User.findOne({
       where: {
-        id,
+        email,
         verificationToken,
+      },
+    });
+
+    return user;
+  };
+
+  public findUserByPasswordResetToken = async (
+    email: string,
+    passwordResetToken: string
+  ): Promise<User | null> => {
+    const user = await User.findOne({
+      where: {
+        email,
+        passwordResetToken,
       },
     });
 
@@ -41,7 +54,7 @@ class UserService {
   public createUser = async (email: string, password: string) => {
     const salt = await genSalt();
     const hashedPassword = await hash(password, salt);
-    const verificationToken = randomBytes(25).toString("hex");
+    const verificationToken = jwt.sign({ email }, env.VERIFY_EMAIL_SECRET);
     const user = await User.create({
       email: email,
       password: hashedPassword,
@@ -97,12 +110,53 @@ class UserService {
     });
   };
 
+  public resetPassword = async (user: User) => {
+    const passwordResetToken = jwt.sign(
+      { id: user.id, email: user.email },
+      env.PASSWORD_RESET_SECRET,
+      {
+        expiresIn: env.PASSWORD_RESET_EXPIRATION,
+      }
+    );
+
+    await user.update({
+      passwordResetToken,
+    });
+
+    await this.sendPasswordResetEmail(user);
+  };
+
+  public updatePassword = async (user: User, password: string) => {
+    const salt = await genSalt();
+    const hashedPassword = await hash(password, salt);
+    await user.update({
+      password: hashedPassword,
+    });
+  };
+
+  public updateIsVerified = async (user: User, isVerified: boolean) => {
+    await user.update({
+      isVerified,
+    });
+  };
+
+  private sendPasswordResetEmail = async (user: User) => {
+    const mail = {
+      from: "noahskorner@gmail.com",
+      to: user.email,
+      subject: "Reset your password!",
+      text: `${env.HOST}/user/password/${user.passwordResetToken}`,
+    };
+
+    await mailService.sendMail(mail);
+  };
+
   private sendVerificationEmail = async (user: User) => {
     const mail = {
       from: "noahskorner@gmail.com",
       to: user.email,
       subject: "Welcome to typescript-template!",
-      text: `${env.HOST}/user/verify-email/${user.id}/${user.verificationToken}`,
+      text: `${env.HOST}/user/verify-email/${user.verificationToken}`,
     };
 
     await mailService.sendMail(mail);

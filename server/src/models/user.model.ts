@@ -15,6 +15,9 @@ class User extends Model {
   @Column(DataType.STRING)
   verificationToken!: string;
 
+  @Column(DataType.STRING)
+  passwordResetToken!: string;
+
   @HasMany(() => RefreshToken, {
     onDelete: "CASCADE",
   })

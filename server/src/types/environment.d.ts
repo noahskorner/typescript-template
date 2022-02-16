@@ -17,6 +17,9 @@ declare global {
       ACCESS_TOKEN_EXPIRATION?: string;
       REFRESH_TOKEN_SECRET?: string;
       REFRESH_TOKEN_EXPIRATION?: string;
+      VERIFY_EMAIL_SECRET?: string;
+      PASSWORD_RESET_SECRET?: string;
+      PASSWORD_RESET_EXPIRATION?: string;
     }
   }
 }
