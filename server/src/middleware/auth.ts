@@ -1,5 +1,6 @@
 import jwt, { VerifyErrors } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
+import env from "../config/env.config";
 
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
@@ -9,7 +10,7 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
 
   jwt.verify(
     token,
-    process.env.ACCESS_TOKEN_SECRET ?? "",
+    env.ACCESS_TOKEN_SECRET,
     (err: VerifyErrors | null, user: any) => {
       if (err) return res.sendStatus(403);
       req.user = user;

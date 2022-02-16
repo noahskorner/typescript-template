@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 import app from "./app";
+import env from "./config/env.config";
 
-const port = process.env.PORT ? process.env.PORT : 3001;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}...`);
+app.listen(env.PORT, () => {
+  console.log(`Server listening on port ${env.PORT}...`);
 });

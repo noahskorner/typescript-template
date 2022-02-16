@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { mailService } from "./mail.service";
 import { RefreshToken } from "../models/refreshToken.model";
+import env from "../config/env.config";
 
 interface AuthResponse {
   accessToken: string;
@@ -63,11 +64,11 @@ class UserService {
   ) => {
     const payload = { id, email, roles };
 
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET ?? '', {
-      expiresIn: 900,
+    const accessToken = jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
+      expiresIn: env.ACCESS_TOKEN_EXPIRATION,
     });
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET ?? '', {
-      expiresIn: "15 days",
+    const refreshToken = jwt.sign(payload, env.REFRESH_TOKEN_SECRET, {
+      expiresIn: env.REFRESH_TOKEN_EXPIRATION,
     });
 
     await RefreshToken.destroy({
@@ -101,7 +102,7 @@ class UserService {
       from: "noahskorner@gmail.com",
       to: user.email,
       subject: "Welcome to typescript-template!",
-      text: `${process.env.HOST}/user/verify-email/${user.id}/${user.verificationToken}`,
+      text: `${env.HOST}/user/verify-email/${user.id}/${user.verificationToken}`,
     };
 
     await mailService.sendMail(mail);

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:

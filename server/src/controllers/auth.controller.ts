@@ -4,6 +4,7 @@ import jwt, { VerifyErrors } from "jsonwebtoken";
 import catchAsync from "../middleware/catchAsync";
 import { Request, Response } from "express";
 import { userNotFound, emailNotVerified } from "../responses";
+import env from "../config/env.config";
 
 class AuthController {
   public login = catchAsync(async (req: Request, res: Response) => {
@@ -44,7 +45,7 @@ class AuthController {
     // verify the token
     jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET ?? "",
+      env.REFRESH_TOKEN_SECRET,
       async (error: VerifyErrors | null, user: any) => {
         if (error) {
           console.log(error);
