@@ -1,12 +1,8 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import cors from "cors";
 import db from "./models";
 import router from "./routes";
 import errorHandler from "./middleware/errorHandler";
-
 
 // MIDDLEWARE
 const app = express();
@@ -25,8 +21,4 @@ db.sequelize.sync();
 //   console.log("Drop and re-sync db...");
 // });
 
-// START SERVER
-const port = process.env.PORT ? process.env.PORT : 3001;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}...`);
-});
+export default app;
