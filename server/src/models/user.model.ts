@@ -12,7 +12,7 @@ import { Role } from "./role.model";
 import { UserRole } from "./userRole";
 
 @DefaultScope(() => ({
-  include: [{ model: Role, attributes: ["name"], include: [] }],
+  include: [{ model: UserRole, attributes: ["createdAt", "updatedAt"], include: [Role] }],
 }))
 @Table({ tableName: "user", underscored: true })
 class User extends Model {
@@ -37,7 +37,9 @@ class User extends Model {
   refreshTokens!: RefreshToken[];
 
   @BelongsToMany(() => Role, {
-    through: { model: () => UserRole },
+    through: {
+      model: () => UserRole,
+    },
   })
   roles!: Role[];
 

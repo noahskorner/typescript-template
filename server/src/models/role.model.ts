@@ -15,14 +15,14 @@ class Role extends Model {
   name!: "ADMIN" | "SUPERADMIN";
 
   @BelongsToMany(() => User, {
-    through: { model: () => UserRole },
+    through: () => UserRole,
   })
   users!: User[];
 
   @HasMany(() => UserRole, {
-    onDelete: "CASCADE",
+    onDelete: "CASECADE",
   })
-  userRoles!: UserRole[];
+  roleUsers!: UserRole[];
 }
 
 export { Role };
