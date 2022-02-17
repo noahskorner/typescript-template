@@ -17,12 +17,12 @@ class Role extends Model {
   @BelongsToMany(() => User, {
     through: () => UserRole,
   })
-  users!: User[];
+  users!: Array<User>;
 
   @HasMany(() => UserRole, {
     onDelete: "CASECADE",
   })
-  roleUsers!: UserRole[];
+  roleUsers!: Array<UserRole>;
 }
 
 export { Role };

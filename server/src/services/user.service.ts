@@ -70,8 +70,9 @@ class UserService {
     return await compare(password, user.password);
   };
 
-  public generateAuthResponse = async (id: string, email: string) => {
-    const payload = { id, email };
+  public generateAuthResponse = async (user: User) => {
+    const roles = user.userRoles.map((userRole) => userRole.role.name);
+    const payload = { id: user.id, email: user.email, roles: roles };
 
     const accessToken = jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
       expiresIn: env.ACCESS_TOKEN_EXPIRATION,
@@ -81,9 +82,9 @@ class UserService {
     });
 
     await RefreshToken.destroy({
-      where: { userId: id },
+      where: { userId: user.id },
     });
-    await RefreshToken.create({ token: refreshToken, userId: id });
+    await RefreshToken.create({ token: refreshToken, userId: user.id });
 
     return { accessToken, refreshToken };
   };

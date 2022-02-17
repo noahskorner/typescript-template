@@ -6,8 +6,13 @@ declare global {
   interface RequestUser {
     id: string;
     email: string;
-    roles: string[];
+    roles: Array<string>;
+  }
+
+  enum RoleType {
+    ADMIN = "ADMIN",
+    SUPERADMIN = "SUPERADMIN",
   }
 }
 
-export { RequestUser };
+export { RequestUser, RoleType };

@@ -34,19 +34,19 @@ class User extends Model {
   @HasMany(() => RefreshToken, {
     onDelete: "CASCADE",
   })
-  refreshTokens!: RefreshToken[];
+  refreshTokens!: Array<RefreshToken>;
 
   @BelongsToMany(() => Role, {
     through: {
       model: () => UserRole,
     },
   })
-  roles!: Role[];
+  roles!: Array<Role>;
 
   @HasMany(() => UserRole, {
     onDelete: "CASCADE",
   })
-  userRoles!: UserRole[];
+  userRoles!: Array<UserRole>;
 }
 
 export { User };

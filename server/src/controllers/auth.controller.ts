@@ -23,10 +23,7 @@ class AuthController {
 
     if (!user.isVerified) return res.status(403).json(emailNotVerified);
 
-    const authResponse = await userService.generateAuthResponse(
-      user.id,
-      user.email
-    );
+    const authResponse = await userService.generateAuthResponse(user);
     return res.status(200).json(authResponse);
   });
 
@@ -50,10 +47,7 @@ class AuthController {
         if (error) return res.sendStatus(403);
 
         // issue new tokens
-        const authResponse = await userService.generateAuthResponse(
-          user.id,
-          user.email
-        );
+        const authResponse = await userService.generateAuthResponse(user);
         return res.status(200).json(authResponse);
       }
     );
