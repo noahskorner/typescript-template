@@ -25,8 +25,7 @@ class AuthController {
 
     const authResponse = await userService.generateAuthResponse(
       user.id,
-      user.email,
-      user.roles
+      user.email
     );
     return res.status(200).json(authResponse);
   });
@@ -53,8 +52,7 @@ class AuthController {
         // issue new tokens
         const authResponse = await userService.generateAuthResponse(
           user.id,
-          user.email,
-          user.roles
+          user.email
         );
         return res.status(200).json(authResponse);
       }

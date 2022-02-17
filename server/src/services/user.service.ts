@@ -70,12 +70,8 @@ class UserService {
     return await compare(password, user.password);
   };
 
-  public generateAuthResponse = async (
-    id: string,
-    email: string,
-    roles: string[]
-  ) => {
-    const payload = { id, email, roles };
+  public generateAuthResponse = async (id: string, email: string) => {
+    const payload = { id, email };
 
     const accessToken = jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
       expiresIn: env.ACCESS_TOKEN_EXPIRATION,

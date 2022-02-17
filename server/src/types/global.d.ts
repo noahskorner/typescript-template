@@ -1,9 +1,6 @@
 declare global {
-  interface ErrorType {
-    value?: string;
-    msg: string;
-    param?: string;
-    location?: string;
+  interface ResponseMessage {
+    message: string;
   }
 
   interface RequestUser {

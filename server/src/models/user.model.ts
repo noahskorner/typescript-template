@@ -1,6 +1,19 @@
-import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  BelongsToMany,
+  DefaultScope,
+} from "sequelize-typescript";
 import { RefreshToken } from "./refreshToken.model";
+import { Role } from "./role.model";
+import { UserRole } from "./userRole";
 
+@DefaultScope(() => ({
+  include: [{ model: Role, attributes: ["name"], include: [] }],
+}))
 @Table({ tableName: "user", underscored: true })
 class User extends Model {
   @Column(DataType.STRING)
@@ -23,7 +36,15 @@ class User extends Model {
   })
   refreshTokens!: RefreshToken[];
 
-  roles!: string[];
+  @BelongsToMany(() => Role, {
+    through: { model: () => UserRole },
+  })
+  roles!: Role[];
+
+  @HasMany(() => UserRole, {
+    onDelete: "CASCADE",
+  })
+  userRoles!: UserRole[];
 }
 
 export { User };
