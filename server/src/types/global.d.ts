@@ -8,11 +8,6 @@ declare global {
     email: string;
     roles: Array<string>;
   }
-
-  enum RoleType {
-    ADMIN = "ADMIN",
-    SUPERADMIN = "SUPERADMIN",
-  }
 }
 
-export { RequestUser, RoleType };
+export { RequestUser };

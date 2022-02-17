@@ -1,8 +1,8 @@
 import { genSalt, hash, compare } from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model";
+import { User } from "../db/models/user.model";
 import { mailService } from "./mail.service";
-import { RefreshToken } from "../models/refreshToken.model";
+import { RefreshToken } from "../db/models/refreshToken.model";
 import env from "../config/env.config";
 
 interface AuthResponse {
