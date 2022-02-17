@@ -1,4 +1,4 @@
 */node_modules
-server/src/config/config.json
 .env
 .env.*
+server/src/db/config.json
