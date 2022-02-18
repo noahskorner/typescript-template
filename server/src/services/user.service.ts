@@ -1,9 +1,9 @@
-import { genSalt, hash, compare } from "bcrypt";
-import jwt from "jsonwebtoken";
-import { User } from "../db/models/user.model";
-import { mailService } from "./mail.service";
-import { RefreshToken } from "../db/models/refreshToken.model";
-import env from "../config/env.config";
+import { genSalt, hash, compare } from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { User } from '../db/models/user.model';
+import { mailService } from './mail.service';
+import { RefreshToken } from '../db/models/refreshToken.model';
+import env from '../config/env.config';
 
 class UserService {
   public findUserByEmail = async (email: string): Promise<User | null> => {
@@ -135,9 +135,9 @@ class UserService {
 
   private sendPasswordResetEmail = async (user: User) => {
     const mail = {
-      from: "noahskorner@gmail.com",
+      from: 'noahskorner@gmail.com',
       to: user.email,
-      subject: "Reset your password!",
+      subject: 'Reset your password!',
       text: `${env.HOST}/user/password/${user.passwordResetToken}`,
     };
 
@@ -146,9 +146,9 @@ class UserService {
 
   private sendVerificationEmail = async (user: User) => {
     const mail = {
-      from: "noahskorner@gmail.com",
+      from: 'noahskorner@gmail.com',
       to: user.email,
-      subject: "Welcome to typescript-template!",
+      subject: 'Welcome to typescript-template!',
       text: `${env.HOST}/user/verify-email/${user.verificationToken}`,
     };
 

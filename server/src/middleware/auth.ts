@@ -1,13 +1,13 @@
-import jwt, { VerifyErrors } from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
-import env from "../config/env.config";
-import { UserRole } from "../db/models/userRole";
-import { Role } from "../db/models/role.model";
-import { RoleEnum } from "../types/enums";
+import jwt, { VerifyErrors } from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import env from '../config/env.config';
+import { UserRole } from '../db/models/userRole';
+import { Role } from '../db/models/role.model';
+import { RoleEnum } from '../types/enums';
 
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) return res.sendStatus(401);
 

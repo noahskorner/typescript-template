@@ -1,10 +1,10 @@
-import { validationResult } from "express-validator";
-import { userService } from "../services/user.service";
-import jwt, { VerifyErrors } from "jsonwebtoken";
-import catchAsync from "../middleware/catchAsync";
-import { Request, Response } from "express";
-import { userNotFound, emailNotVerified } from "../responses";
-import env from "../config/env.config";
+import { validationResult } from 'express-validator';
+import { userService } from '../services/user.service';
+import jwt, { VerifyErrors } from 'jsonwebtoken';
+import catchAsync from '../middleware/catchAsync';
+import { Request, Response } from 'express';
+import { userNotFound, emailNotVerified } from '../responses';
+import env from '../config/env.config';
 
 class AuthController {
   public login = catchAsync(async (req: Request, res: Response) => {

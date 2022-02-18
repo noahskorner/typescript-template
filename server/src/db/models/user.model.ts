@@ -6,15 +6,21 @@ import {
   HasMany,
   BelongsToMany,
   DefaultScope,
-} from "sequelize-typescript";
-import { RefreshToken } from "./refreshToken.model";
-import { Role } from "./role.model";
-import { UserRole } from "./userRole";
+} from 'sequelize-typescript';
+import { RefreshToken } from './refreshToken.model';
+import { Role } from './role.model';
+import { UserRole } from './userRole';
 
 @DefaultScope(() => ({
-  include: [{ model: UserRole, attributes: ["createdAt", "updatedAt"], include: [Role] }],
+  include: [
+    {
+      model: UserRole,
+      attributes: ['createdAt', 'updatedAt'],
+      include: [Role],
+    },
+  ],
 }))
-@Table({ tableName: "user", underscored: true })
+@Table({ tableName: 'user', underscored: true })
 class User extends Model {
   @Column(DataType.STRING)
   email!: string;
@@ -32,7 +38,7 @@ class User extends Model {
   passwordResetToken!: string;
 
   @HasMany(() => RefreshToken, {
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   refreshTokens!: Array<RefreshToken>;
 
@@ -44,7 +50,7 @@ class User extends Model {
   roles!: Array<Role>;
 
   @HasMany(() => UserRole, {
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   userRoles!: Array<UserRole>;
 }

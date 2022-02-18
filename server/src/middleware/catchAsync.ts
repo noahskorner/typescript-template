@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const catchAsync = (fn: Function) => {

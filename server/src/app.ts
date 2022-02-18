@@ -1,15 +1,15 @@
-import express from "express";
-import cors from "cors";
-import db from "./db/models";
-import router from "./routes";
-import errorHandler from "./middleware/errorHandler";
+import express from 'express';
+import cors from 'cors';
+import db from './db/models';
+import router from './routes';
+import errorHandler from './middleware/errorHandler';
 
 // MIDDLEWARE
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ['http://localhost:3000'],
   })
 );
 app.use(router);

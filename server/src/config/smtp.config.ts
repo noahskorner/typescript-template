@@ -1,5 +1,5 @@
-import { createTransport } from "nodemailer";
-import env from "./env.config";
+import { createTransport } from 'nodemailer';
+import env from './env.config';
 
 const transporter = createTransport({
   port: 465,

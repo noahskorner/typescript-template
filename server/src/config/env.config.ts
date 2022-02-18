@@ -19,7 +19,7 @@ if (
   process.env.PASSWORD_RESET_SECRET === undefined ||
   process.env.PASSWORD_RESET_EXPIRATION === undefined
 ) {
-  throw new Error("Environment variables missing.");
+  throw new Error('Environment variables missing.');
 }
 
 const env = {

@@ -5,11 +5,11 @@ import {
   BelongsTo,
   PrimaryKey,
   Column,
-} from "sequelize-typescript";
-import { Role } from "./role.model";
-import { User } from "./user.model";
+} from 'sequelize-typescript';
+import { Role } from './role.model';
+import { User } from './user.model';
 
-@Table({ tableName: "user_role", underscored: true })
+@Table({ tableName: 'user_role', underscored: true })
 class UserRole extends Model {
   @BelongsTo(() => User)
   user!: User;
