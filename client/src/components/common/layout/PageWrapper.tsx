@@ -1,6 +1,6 @@
-import useWindowSize from "../../../hooks/useWindowSize";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import useWindowSize from '../../../hooks/useWindowSize';
+import Header from './Header';
+import Sidebar from './Sidebar';
 
 interface PageWrapperProps {
   children?: JSX.Element | JSX.Element[];

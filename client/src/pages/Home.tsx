@@ -1,4 +1,4 @@
-import PageWrapper from "../components/common/layout/PageWrapper";
+import PageWrapper from '../components/common/layout/PageWrapper';
 
 const Home = () => {
   return (
