@@ -16,3 +16,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Tailwind Classes */
+@layer components {
+  /* Backgrounds */
+  .bg-primary {
+    @apply bg-white dark:bg-slate-900;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply w-8 h-8 border rounded-md border-primary flex justify-center items-center hover:bg-slate-100 dark:hover:bg-slate-800;
+  }
+
+  .sidebar-btn {
+    @apply w-full px-4 py-1 flex justify-between items-center text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded font-medium capitalize;
+  }
+
+  /* Borders */
+  .border-primary {
+    @apply border-slate-900/10 dark:border-slate-300/10;
+  }
+}

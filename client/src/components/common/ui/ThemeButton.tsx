@@ -1,5 +1,6 @@
 import { SunIcon, MoonIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
+import IconButton from './IconButton';
 
 enum ThemeEnum {
   LIGHT,
@@ -27,20 +28,16 @@ const ThemeButton = () => {
     }
   }, [theme]);
 
-  return (
-    <button>
-      {theme === ThemeEnum.LIGHT ? (
-        <SunIcon
-          className="h-6 w-6 hover:text-sky-500"
-          onClick={() => setTheme(ThemeEnum.DARK)}
-        />
-      ) : (
-        <MoonIcon
-          className="h-6 w-6 hover:text-sky-500"
-          onClick={() => setTheme(ThemeEnum.LIGHT)}
-        />
-      )}
-    </button>
+  return theme === ThemeEnum.LIGHT ? (
+    <IconButton
+      handleClick={() => setTheme(ThemeEnum.DARK)}
+      icon={<SunIcon className="h-5 w-5" />}
+    />
+  ) : (
+    <IconButton
+      handleClick={() => setTheme(ThemeEnum.LIGHT)}
+      icon={<MoonIcon className="h-5 w-5" />}
+    />
   );
 };
 

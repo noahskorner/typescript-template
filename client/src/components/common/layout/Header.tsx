@@ -1,16 +1,27 @@
-import { LoginIcon } from '@heroicons/react/outline';
+import { LoginIcon, MenuAlt1Icon } from '@heroicons/react/outline';
 import ThemeButton from '../ui/ThemeButton';
+import IconButton from '../ui/IconButton';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface HeaderProps {
+  setShowSidebar: Function;
+}
+
+const Header = ({ setShowSidebar }: HeaderProps) => {
   return (
-    <nav className="border-b border-slate-900/10 dark:border-slate-300/10 w-full h-14 font-medium flex items-center justify-center text-sm px-4 sm:px-6">
-      <div className="max-w-container w-full space-x-6 flex justify-between text-slate-200">
-        <div></div>
+    <nav className="border-b border-primary w-full h-14 font-medium flex items-center justify-center text-sm px-2 lg:px-4">
+      <div className="w-full space-x-6 flex justify-between">
+        <div className="flex space-x-4">
+          <IconButton
+            handleClick={() => setShowSidebar(true)}
+            icon={<MenuAlt1Icon className="h-5 w-5" />}
+            className="lg:hidden"
+          />
+        </div>
         <div className="flex space-x-4">
           <ThemeButton />
-          <Link to="/login">
-            <LoginIcon className="h-6 w-6 hover:text-sky-500" />
+          <Link to="/login" className="btn-primary">
+            <LoginIcon className="h-5 w-5" />
           </Link>
         </div>
       </div>
