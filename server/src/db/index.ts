@@ -1,4 +1,5 @@
-const { exec } = require("child_process");
+/* eslint-disable no-undef */
+import { exec } from "child_process";
 
 const seedDatabase = async () => {
   await new Promise((resolve, reject) => {
@@ -15,4 +16,4 @@ const seedDatabase = async () => {
   });
 };
 
-module.exports = seedDatabase;
+export default seedDatabase;

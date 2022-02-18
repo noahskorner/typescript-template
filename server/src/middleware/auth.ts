@@ -14,9 +14,16 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   jwt.verify(
     token,
     env.ACCESS_TOKEN_SECRET,
-    (err: VerifyErrors | null, user: any) => {
-      req.user = user;
-      next();
+    (err: VerifyErrors | null, decoded: unknown) => {
+      if (err) return res.sendStatus(403);
+      try {
+        const { id, email, roles } = decoded as RequestUser;
+        req.user = { id, email, roles };
+        next();
+      } catch (error) {
+        console.log(error);
+        return res.sendStatus(403);
+      }
     }
   );
 };
@@ -38,6 +45,7 @@ const authorize = (permittedRoles: Array<RoleEnum>) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         return res.sendStatus(403);
       });
   };

@@ -8,6 +8,11 @@ declare global {
     email: string;
     roles: Array<string>;
   }
+
+  interface TokenPair {
+    accessToken: string;
+    refreshToken: string;
+  }
 }
 
 export { RequestUser };

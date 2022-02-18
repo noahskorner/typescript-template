@@ -25,28 +25,34 @@ class UserController {
     jwt.verify(
       verificationToken,
       env.VERIFY_EMAIL_SECRET,
-      async (err: VerifyErrors | null, { email }: any) => {
+      async (err: VerifyErrors | null, decoded: unknown) => {
         if (err) return res.sendStatus(403);
+        try {
+          const { email } = decoded as { email: string };
 
-        userService
-          .findUserByVerificationToken(email, verificationToken)
-          .then((user) => {
-            if (!user || user.isVerified) {
-              return res.sendStatus(400);
-            }
+          userService
+            .findUserByVerificationToken(email, verificationToken)
+            .then((user) => {
+              if (!user || user.isVerified) {
+                return res.sendStatus(400);
+              }
 
-            userService
-              .updateIsVerified(user, true)
-              .then(() => {
-                return res.sendStatus(200);
-              })
-              .catch(() => {
-                return res.sendStatus(500);
-              });
-          })
-          .catch(() => {
-            return res.sendStatus(500);
-          });
+              userService
+                .updateIsVerified(user, true)
+                .then(() => {
+                  return res.sendStatus(200);
+                })
+                .catch(() => {
+                  return res.sendStatus(500);
+                });
+            })
+            .catch(() => {
+              return res.sendStatus(500);
+            });
+        } catch (error) {
+          console.log(error);
+          return res.sendStatus(403);
+        }
       }
     );
   });
@@ -89,28 +95,34 @@ class UserController {
       jwt.verify(
         resetPasswordToken,
         env.PASSWORD_RESET_SECRET,
-        async (err: VerifyErrors | null, { email }: any) => {
+        async (err: VerifyErrors | null, decoded: unknown) => {
           if (err) return res.sendStatus(403);
+          try {
+            const { email } = decoded as { email: string };
 
-          userService
-            .findUserByPasswordResetToken(email, resetPasswordToken)
-            .then((user) => {
-              if (!user) {
-                return res.sendStatus(400);
-              }
+            userService
+              .findUserByPasswordResetToken(email, resetPasswordToken)
+              .then((user) => {
+                if (!user) {
+                  return res.sendStatus(400);
+                }
 
-              userService
-                .updatePassword(user, password1)
-                .then(() => {
-                  return res.sendStatus(200);
-                })
-                .catch(() => {
-                  return res.sendStatus(500);
-                });
-            })
-            .catch(() => {
-              return res.sendStatus(500);
-            });
+                userService
+                  .updatePassword(user, password1)
+                  .then(() => {
+                    return res.sendStatus(200);
+                  })
+                  .catch(() => {
+                    return res.sendStatus(500);
+                  });
+              })
+              .catch(() => {
+                return res.sendStatus(500);
+              });
+          } catch (error) {
+            console.log(error);
+            return res.sendStatus(403);
+          }
         }
       );
     }

@@ -17,19 +17,19 @@ app.use(errorHandler);
 
 // DATABASE
 db.sequelize.sync();
-// const env = require("./config/env.config");
-// if (env.NODE_ENV === "development" || "test") {
-//   const seedDatabase = require("./db");
+// import env from "./config/env.config";
+// import seedDatabase from "./db";
+// if (env.NODE_ENV === "development" || env.NODE_ENV === "test") {
 //   db.sequelize
 //     .sync({ force: true })
 //     .then(async () => {
 //       console.log("Drop and re-sync db...");
 //     })
-//     .then(
+//     .then(() => {
 //       seedDatabase().then(() => {
-//         console.log("Seeding db...");
-//       })
-//     );
+//         console.log("Seeding database...");
+//       });
+//     });
 // }
 
 export default app;

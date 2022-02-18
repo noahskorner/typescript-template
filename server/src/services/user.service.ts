@@ -5,11 +5,6 @@ import { mailService } from "./mail.service";
 import { RefreshToken } from "../db/models/refreshToken.model";
 import env from "../config/env.config";
 
-interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
-}
-
 class UserService {
   public findUserByEmail = async (email: string): Promise<User | null> => {
     const user = await User.findOne({ where: { email } });
@@ -70,21 +65,22 @@ class UserService {
     return await compare(password, user.password);
   };
 
-  public generateAuthResponse = async (user: User) => {
-    const roles = user.userRoles.map((userRole) => userRole.role.name);
-    const payload = { id: user.id, email: user.email, roles: roles };
+  public generateAuthResponse = async (
+    user: RequestUser | User
+  ): Promise<TokenPair> => {
+    const requestUser = this.getRequestUser(user);
 
-    const accessToken = jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
+    const accessToken = jwt.sign(requestUser, env.ACCESS_TOKEN_SECRET, {
       expiresIn: env.ACCESS_TOKEN_EXPIRATION,
     });
-    const refreshToken = jwt.sign(payload, env.REFRESH_TOKEN_SECRET, {
+    const refreshToken = jwt.sign(requestUser, env.REFRESH_TOKEN_SECRET, {
       expiresIn: env.REFRESH_TOKEN_EXPIRATION,
     });
 
     await RefreshToken.destroy({
-      where: { userId: user.id },
+      where: { userId: requestUser.id },
     });
-    await RefreshToken.create({ token: refreshToken, userId: user.id });
+    await RefreshToken.create({ token: refreshToken, userId: requestUser.id });
 
     return { accessToken, refreshToken };
   };
@@ -158,7 +154,18 @@ class UserService {
 
     await mailService.sendMail(mail);
   };
+
+  private getRequestUser = (user: User | RequestUser): RequestUser => {
+    if (user instanceof User) {
+      const roles = user.userRoles.map((userRole) => userRole.role.name);
+      return {
+        id: user.id,
+        email: user.email,
+        roles: roles,
+      } as RequestUser;
+    } else return user;
+  };
 }
 const userService = new UserService();
 
-export { userService, AuthResponse };
+export { userService };

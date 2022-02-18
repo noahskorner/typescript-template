@@ -43,12 +43,19 @@ class AuthController {
     jwt.verify(
       refreshToken,
       env.REFRESH_TOKEN_SECRET,
-      async (error: VerifyErrors | null, user: any) => {
+      async (error: VerifyErrors | null, decoded: unknown) => {
         if (error) return res.sendStatus(403);
+        try {
+          const { id, email, roles } = decoded as RequestUser;
+          const user = { id, email, roles };
 
-        // issue new tokens
-        const authResponse = await userService.generateAuthResponse(user);
-        return res.status(200).json(authResponse);
+          // issue new tokens
+          const authResponse = await userService.generateAuthResponse(user);
+          return res.status(200).json(authResponse);
+        } catch (error) {
+          console.log(error);
+          res.sendStatus(403);
+        }
       }
     );
   });
