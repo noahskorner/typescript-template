@@ -29,12 +29,18 @@ body {
     @apply w-8 h-8 border rounded-md border-primary flex justify-center items-center hover:bg-slate-100 dark:hover:bg-slate-800;
   }
 
-  .sidebar-btn {
-    @apply w-full px-4 py-1 flex justify-between items-center text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded font-medium capitalize;
-  }
-
   /* Borders */
   .border-primary {
     @apply border-slate-900/10 dark:border-slate-300/10;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply w-full lg:max-w-xs bg-primary border-primary border-r fixed lg:relative top-0 left-0 z-20;
+    max-width: min(50%, 20rem);
+  }
+
+  .sidebar-btn {
+    @apply w-full px-4 py-1 flex justify-between items-center text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded font-medium capitalize;
   }
 }

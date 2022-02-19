@@ -8,20 +8,25 @@ interface PageWrapperProps {
 }
 
 const PageWrapper = (props: PageWrapperProps) => {
-  const { width, height } = useWindowSize();
-  const pageWrapperStyle = { width: `${width}px`, minHeight: `${height}px` };
+  const { widthStr, heightStr, isMobileWidth } = useWindowSize();
   const { toggle: showSidebar, setToggle: setShowSidebar } = useToggle(false);
 
   return (
     <div
       className="bg-primary flex text-slate-700 dark:text-slate-200 relative"
-      style={pageWrapperStyle}
+      style={{ width: widthStr, minHeight: heightStr }}
     >
-      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+      <Sidebar showSidebar={showSidebar} />
+      {showSidebar && isMobileWidth && (
+        <div
+          onClick={() => setShowSidebar(false)}
+          className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-20 z-10"
+        ></div>
+      )}
       <div className="w-full relative z-0">
         <Header setShowSidebar={setShowSidebar} />
         <div className="w-full flex justify-center 2xl:pr-96">
-          <div className="w-full max-w-7xl">{props.children}</div>
+          <div className="w-full max-w-3xl">{props.children}</div>
         </div>
       </div>
     </div>

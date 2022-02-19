@@ -5,11 +5,20 @@ interface Size {
   height: number | undefined;
 }
 
-const useWindowSize = (): Size => {
+const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<Size>({
     width: undefined,
     height: undefined,
   });
+  const [widthStr, setWidthStr] = useState('');
+  const [heightStr, setHeightStr] = useState('');
+  const [isMobileWidth, setIsMobileWidth] = useState(false);
+
+  useEffect(() => {
+    setWidthStr(`${windowSize.width}px`);
+    setHeightStr(`${windowSize.height}px`);
+    setIsMobileWidth(windowSize.width !== undefined && windowSize.width < 1024);
+  }, [windowSize]);
 
   useEffect(() => {
     function handleResize() {
@@ -23,7 +32,13 @@ const useWindowSize = (): Size => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return windowSize;
+  return {
+    height: windowSize.height,
+    width: windowSize.width,
+    widthStr,
+    heightStr,
+    isMobileWidth,
+  };
 };
 
 export default useWindowSize;

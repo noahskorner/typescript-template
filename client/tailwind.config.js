@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       maxWidth: {
         container: '85rem',
+        '1/2': '50%',
       },
     },
   },

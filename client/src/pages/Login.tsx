@@ -1,5 +1,11 @@
+import PageWrapper from '../components/common/layout/PageWrapper';
+
 const Login = () => {
-  return <div>Login</div>;
+  return (
+    <PageWrapper>
+      <div>Login</div>
+    </PageWrapper>
+  );
 };
 
 export default Login;
