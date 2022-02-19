@@ -41,6 +41,6 @@ body {
   }
 
   .sidebar-btn {
-    @apply w-full px-4 py-1 flex justify-between items-center text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded font-medium capitalize;
+    @apply w-full px-4 py-1 flex justify-between items-center text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded;
   }
 }

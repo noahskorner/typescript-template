@@ -1,19 +1,47 @@
 import useWindowSize from '../../../hooks/useWindowSize';
-import { ChevronRightIcon } from '@heroicons/react/outline';
+import SidebarButton, { SidebarButtonProps } from '../ui/SidebarButton';
 
 interface SidebarProps {
   showSidebar: boolean;
 }
 
-const sidebarBtns = [
-  'inputs',
-  'data display',
-  'feedback',
-  'surfaces',
-  'navigation',
-  'layout',
-  'utils',
-  'data grid',
+const sidebarBtns: Array<SidebarButtonProps> = [
+  {
+    text: 'Inputs',
+    children: [
+      {
+        text: 'Button',
+      },
+      {
+        text: 'Button Group',
+      },
+      {
+        text: 'Checkbox',
+      },
+      {
+        text: 'Radio Button',
+      },
+      {
+        text: 'Select',
+      },
+      {
+        text: 'Slider',
+      },
+      {
+        text: 'Switch',
+      },
+      {
+        text: 'Text Field',
+      },
+    ],
+  },
+  { text: 'Data Display' },
+  { text: 'Feedback' },
+  { text: 'Surfaces' },
+  { text: 'Navigation' },
+  { text: 'Layout' },
+  { text: 'Utils' },
+  { text: 'Data Grid' },
 ];
 
 const Sidebar = ({ showSidebar }: SidebarProps) => {
@@ -35,13 +63,11 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
         <h5 className="text-lg font-semibold">Components</h5>
         {sidebarBtns.map((sidebarBtn, index) => {
           return (
-            <button key={index} className="sidebar-btn">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <h6>{sidebarBtn}</h6>
-              </div>
-              <ChevronRightIcon className="w-4 h-4 text-blue-500" />
-            </button>
+            <SidebarButton
+              text={sidebarBtn.text}
+              children={sidebarBtn.children}
+              key={index}
+            />
           );
         })}
       </div>

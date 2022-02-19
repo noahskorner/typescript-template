@@ -42,3 +42,23 @@
     -webkit-transform: translateX(-100%);
   }
 }
+
+.slide-up {
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  height: 0;
+}
+
+.slide-up:target {
+  height: auto;
+}
+
+.slide-down {
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  height: auto;
+}
+
+.slide-down:target {
+  height: 0;
+}
