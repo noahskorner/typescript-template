@@ -13,7 +13,7 @@ const Header = ({ setShowSidebar }: HeaderProps) => {
       <div className="w-full space-x-6 flex justify-between">
         <div className="flex space-x-4">
           <IconButton
-            handleClick={() => setShowSidebar(true)}
+            onClick={() => setShowSidebar(true)}
             icon={<MenuAlt1Icon className="h-5 w-5" />}
             className="lg:hidden"
           />

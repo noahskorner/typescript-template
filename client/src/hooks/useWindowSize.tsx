@@ -12,12 +12,14 @@ const useWindowSize = () => {
   });
   const [widthStr, setWidthStr] = useState('');
   const [heightStr, setHeightStr] = useState('');
-  const [isMobileWidth, setIsMobileWidth] = useState(false);
+  const [isMobileWidth, setIsMobileWidth] = useState(true);
 
   useEffect(() => {
-    setWidthStr(`${windowSize.width}px`);
-    setHeightStr(`${windowSize.height}px`);
-    setIsMobileWidth(windowSize.width !== undefined && windowSize.width < 1024);
+    if (windowSize.height !== undefined && windowSize.width !== undefined) {
+      setWidthStr(`${windowSize.width}px`);
+      setHeightStr(`${windowSize.height}px`);
+      setIsMobileWidth(windowSize.width < 1024);
+    }
   }, [windowSize]);
 
   useEffect(() => {
