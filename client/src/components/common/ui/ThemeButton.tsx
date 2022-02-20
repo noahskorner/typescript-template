@@ -30,12 +30,12 @@ const ThemeButton = () => {
 
   return theme === ThemeEnum.LIGHT ? (
     <IconButton
-      handleClick={() => setTheme(ThemeEnum.DARK)}
+      onClick={() => setTheme(ThemeEnum.DARK)}
       icon={<SunIcon className="h-5 w-5" />}
     />
   ) : (
     <IconButton
-      handleClick={() => setTheme(ThemeEnum.LIGHT)}
+      onClick={() => setTheme(ThemeEnum.LIGHT)}
       icon={<MoonIcon className="h-5 w-5" />}
     />
   );

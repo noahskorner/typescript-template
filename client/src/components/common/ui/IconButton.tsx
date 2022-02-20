@@ -1,15 +1,12 @@
 interface IconButtonProps {
-  handleClick: Function;
+  onClick: Function;
   icon: JSX.Element;
   className?: string;
 }
 
-const IconButton = ({ handleClick, icon, className }: IconButtonProps) => {
+const IconButton = ({ onClick, icon, className }: IconButtonProps) => {
   return (
-    <button
-      onClick={() => handleClick()}
-      className={`${className} btn-primary`}
-    >
+    <button onClick={() => onClick()} className={`${className} btn-primary`}>
       {icon}
     </button>
   );

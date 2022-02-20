@@ -1,38 +1,40 @@
 import Button from '../ui/Button';
+import Component from './Component';
+import Variant from './Variant';
 
 const Buttons = () => {
   return (
-    <div id="buttons" className="space-y-4">
-      <h1 className="text-3xl font-bold">Buttons</h1>
-      <div className="space-y-4">
-        <h6 className="font-bold text-xl">Basic Buttons</h6>
-        <div className="border border-primary p-4 flex items-center justify-center space-x-4 rounded-md">
-          <Button children={'Text'} />
-          <Button children={'Outline'} />
-          <Button children={'Fill'} />
-        </div>
-        <h6 className="font-bold text-xl">Disabled</h6>
-        <div className="border border-primary p-4 flex items-center justify-center space-x-4 rounded-md">
-          <Button size="md" children={'Disabled'} disabled />
-        </div>
-        <h6 className="font-bold text-xl">Sizes</h6>
-        <div className="border border-primary p-4 flex items-center justify-center space-x-4 rounded-md">
-          <Button size="sm" children={'Small'} />
-          <Button size="md" children={'Medium'} />
-          <Button size="lg" children={'Large'} />
-        </div>
-        <h6 className="font-bold text-xl">Colors</h6>
-        <div className="border border-primary p-4 flex items-center justify-center space-x-4 rounded-md">
-          <Button size="md" children={'Colors'} />
-        </div>
-        <h6 className="font-bold text-xl">Loading</h6>
-        <div className="border border-primary p-4 flex items-center justify-center space-x-4 rounded-md">
-          <Button size="sm" children={'Loading'} loading />
-          <Button size="md" children={'Loading'} loading />
-          <Button size="lg" children={'Loading'} loading />
-        </div>
-      </div>
-    </div>
+    <Component header="Buttons">
+      <Variant header="Basic Buttons">
+        <Button children={'Text'} />
+        <Button children={'Outline'} />
+        <Button children={'Fill'} />
+      </Variant>
+      <Variant header="Disabled">
+        <Button size="md" children={'Primary'} disabled color="primary" />
+        <Button size="md" children={'Secondary'} disabled color="secondary" />
+        <Button size="md" children={'Success'} disabled color="success" />
+        <Button size="md" children={'Warning'} disabled color="warning" />
+        <Button size="md" children={'Danger'} disabled color="danger" />
+      </Variant>
+      <Variant header="Sizes">
+        <Button size="sm" children={'Small'} />
+        <Button size="md" children={'Medium'} />
+        <Button size="lg" children={'Large'} />
+      </Variant>
+      <Variant header="Colors">
+        <Button size="md" children={'Primary'} color="primary" />
+        <Button size="md" children={'Secondary'} color="secondary" />
+        <Button size="md" children={'Success'} color="success" />
+        <Button size="md" children={'Warning'} color="warning" />
+        <Button size="md" children={'Danger'} color="danger" />
+      </Variant>
+      <Variant header="Loading">
+        <Button size="sm" children={'Loading'} loading />
+        <Button size="md" children={'Loading'} loading />
+        <Button size="lg" children={'Loading'} loading />
+      </Variant>
+    </Component>
   );
 };
 
