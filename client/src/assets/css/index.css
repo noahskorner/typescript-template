@@ -30,7 +30,7 @@ body {
   }
 
   /* Buttons */
-  .btn-primary {
+  .btn-icon {
     @apply w-8 h-8 border rounded-md border-primary flex justify-center items-center hover:bg-slate-100 dark:hover:bg-slate-800;
   }
 

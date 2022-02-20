@@ -6,7 +6,7 @@ interface IconButtonProps {
 
 const IconButton = ({ onClick, icon, className }: IconButtonProps) => {
   return (
-    <button onClick={() => onClick()} className={`${className} btn-primary`}>
+    <button onClick={() => onClick()} className={`${className} btn-icon`}>
       {icon}
     </button>
   );

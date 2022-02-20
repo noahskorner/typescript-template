@@ -20,7 +20,7 @@ const Header = ({ setShowSidebar }: HeaderProps) => {
         </div>
         <div className="flex space-x-4">
           <ThemeButton />
-          <Link to="/login" className="btn-primary">
+          <Link to="/login" className="btn-icon">
             <LoginIcon className="h-5 w-5" />
           </Link>
         </div>
