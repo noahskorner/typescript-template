@@ -6,9 +6,9 @@ const Buttons = () => {
   return (
     <Component header="Buttons">
       <Variant header="Basic Buttons">
-        <Button children={'Text'} />
-        <Button children={'Outline'} />
-        <Button children={'Fill'} />
+        <Button color="secondary" variant="fill" children={'Fill'} />
+        <Button color="secondary" variant="outline" children={'Outline'} />
+        <Button color="secondary" variant="text" children={'Text'} />
       </Variant>
       <Variant header="Disabled">
         <Button size="md" children={'Primary'} disabled color="primary" />
@@ -30,9 +30,9 @@ const Buttons = () => {
         <Button size="md" children={'Danger'} color="danger" />
       </Variant>
       <Variant header="Loading">
-        <Button size="sm" children={'Loading'} loading />
-        <Button size="md" children={'Loading'} loading />
-        <Button size="lg" children={'Loading'} loading />
+        <Button size="sm" children={'Small'} loading />
+        <Button size="md" children={'Medium'} loading />
+        <Button size="lg" children={'Large'} loading />
       </Variant>
     </Component>
   );

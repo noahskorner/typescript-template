@@ -1,5 +1,3 @@
-import '../../../assets/css/spinner.css';
-
 interface SpinnerProps {
   size: 'sm' | 'md' | 'lg';
 }
