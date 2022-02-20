@@ -1,8 +1,10 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import useToggle from '../../../hooks/useToggle';
+import { convertRemToPixels } from '../../../utils/functions';
 
 export interface SidebarButtonType {
   text: string;
+  id?: string;
 }
 
 export interface SidebarButtonProps {
@@ -12,6 +14,12 @@ export interface SidebarButtonProps {
 
 const SidebarButton = ({ text, children }: SidebarButtonProps) => {
   const { toggle: showChildren, setToggle: setShowChildren } = useToggle(false);
+
+  const scrollIntoView = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView();
+    window.scrollBy(0, -convertRemToPixels(3.5));
+  };
 
   return (
     <div>
@@ -30,14 +38,24 @@ const SidebarButton = ({ text, children }: SidebarButtonProps) => {
         )}
       </button>
       <div
-        className={`${
-          showChildren ? 'slide-down' : 'slide-up'
-        } overflow-hidden`}
+        className="overflow-hidden"
+        style={
+          showChildren
+            ? {
+                height: children ? children.length * 1.75 + 'rem' : 0,
+                transition: 'all 0.5s ease-in-out',
+              }
+            : { height: 0, transition: 'all 0.5s ease-in-out' }
+        }
       >
         <div>
-          {children?.map((child) => {
+          {children?.map((child, index) => {
             return (
-              <button className="sidebar-btn text-slate-600 dark:text-slate-400 pl-8">
+              <button
+                onClick={() => child.id && scrollIntoView(child.id)}
+                key={index}
+                className="sidebar-btn text-slate-600 dark:text-slate-400 pl-8"
+              >
                 {child.text}
               </button>
             );

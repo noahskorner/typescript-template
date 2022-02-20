@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ setShowSidebar }: HeaderProps) => {
   return (
-    <nav className="border-b border-primary w-full h-14 font-medium flex items-center justify-center text-sm px-2 lg:px-4">
+    <nav className="border-b border-primary h-14 font-medium flex items-center justify-center text-sm px-2 lg:px-4 fixed top-0 right-0 left-0 lg:left-80 bg-primary z-10">
       <div className="w-full space-x-6 flex justify-between">
         <div className="flex space-x-4">
           <IconButton

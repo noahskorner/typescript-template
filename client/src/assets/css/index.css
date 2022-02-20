@@ -17,6 +17,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
 /* Tailwind Classes */
 @layer components {
   /* Backgrounds */
@@ -36,7 +41,7 @@ body {
 
   /* Sidebar */
   .sidebar {
-    @apply w-full lg:max-w-xs bg-primary border-primary border-r fixed lg:relative top-0 left-0 z-20;
+    @apply w-full lg:max-w-xs bg-primary border-primary border-r fixed top-0 left-0 z-30;
     max-width: min(50%, 20rem);
   }
 
