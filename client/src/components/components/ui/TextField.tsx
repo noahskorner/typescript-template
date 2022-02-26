@@ -1,4 +1,5 @@
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
 import InputMask from 'inputmask';
 
@@ -10,6 +11,7 @@ interface TextFieldProps {
   placeholder?: string;
   errors?: Array<string>;
   mask?: string;
+  icon?: JSX.Element;
 }
 
 const TextField = ({
@@ -20,20 +22,21 @@ const TextField = ({
   placeholder,
   errors = [],
   mask,
+  icon,
 }: TextFieldProps) => {
-  const textFieldRef = useRef(null);
+  const textFieldRef = useRef<any>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    if (textFieldRef && textFieldRef.current) {
-      const inputMask = new InputMask();
+    if (textFieldRef && textFieldRef.current && mask) {
+      const inputMask = new InputMask(mask);
       inputMask.mask(textFieldRef.current);
     }
   }, [mask]);
 
   return (
-    <div className="w-full text-sm relative">
+    <div className="w-full text-sm relative space-y-1">
       {label && <label htmlFor="">{label}</label>}
       {/* Text Field */}
       <div
@@ -43,8 +46,10 @@ const TextField = ({
             : isFocused
             ? 'ring-1 ring-blue-500'
             : ''
-        } w-full border bg-slate-50 dark:bg-slate-800 rounded flex justify-center items-center border-primary`}
+        } w-full border shadow-sm bg-slate-50 dark:bg-slate-800 rounded-md flex justify-center items-center border-primary`}
       >
+        {/* Leading Icon */}
+        <div className="pl-2 text-slate-400">{icon}</div>
         {/* Input */}
         {type !== 'textarea' ? (
           <div className="w-full flex justify-between items-center">
@@ -55,19 +60,18 @@ const TextField = ({
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               value={value}
-              data-inputmask={`${mask ? mask : ''}`}
-              className="w-full bg-slate-50 dark:bg-slate-800 p-2 rounded"
+              className="w-full bg-slate-50 dark:bg-slate-800 p-2 rounded-md"
               placeholder={placeholder && placeholder}
             />
             {type === 'password' && (
               <button
                 onClick={() => setShowPassword(!showPassword)}
-                className="h-full flex justify-center item-center p-2"
+                className="h-full flex justify-center item-center p-2 text-slate-400"
               >
                 {showPassword ? (
-                  <EyeOffIcon className="w-5 h-5" />
+                  <EyeOffIcon className="w-4 h-4" />
                 ) : (
-                  <EyeIcon className="h-5 w-5" />
+                  <EyeIcon className="h-4 w-4" />
                 )}
               </button>
             )}
@@ -80,24 +84,29 @@ const TextField = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder={placeholder && placeholder}
-            data-inputmask={`${mask ? mask : ''}`}
-            className="w-full p-2 bg-slate-50 dark:bg-slate-800 rounded"
+            className="w-full p-2 bg-slate-50 dark:bg-slate-800 rounded-md"
           >
             {value}
           </textarea>
         )}
+        {/* Trailing Icon */}
+        {errors.length ? (
+          <div className="pr-2 text-red-500">
+            <ExclamationCircleIcon className="w-5 h-4" />
+          </div>
+        ) : null}
       </div>
       {/* Errors */}
       {errors.length ? (
-        <ul className="relative left-5 list-disc p-1 text-xs">
+        <div>
           {errors.map((error) => {
             return (
-              <li key={error} className="text-red-500">
+              <p key={error} className="text-red-500 font-medium">
                 {error}
-              </li>
+              </p>
             );
           })}
-        </ul>
+        </div>
       ) : null}
     </div>
   );

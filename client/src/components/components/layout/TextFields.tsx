@@ -2,12 +2,14 @@ import { useState } from 'react';
 import Component from '../layout/Component';
 import Variant from '../layout/Variant';
 import TextField from '../ui/TextField';
+import { AtSymbolIcon } from '@heroicons/react/outline';
 
 const TextFields = () => {
   const [text, setText] = useState('');
   const [password, setPassword] = useState('');
   const [textArea, setTextArea] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
 
   return (
     <Component header="Text Fields">
@@ -40,7 +42,13 @@ const TextFields = () => {
             value={phoneNumber}
             onInput={setPhoneNumber}
             label="Phone Number"
-            mask="'mask': '(999) 999-9999'"
+            mask="(999) 999-9999"
+          />
+          <TextField
+            value={email}
+            onInput={setEmail}
+            label="Icons"
+            icon={<AtSymbolIcon className="w-4 h-4" />}
           />
         </div>
       </Variant>
