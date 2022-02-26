@@ -5,9 +5,9 @@ interface ComponentProps {
 
 const Component = ({ header, children }: ComponentProps) => {
   return (
-    <div>
+    <div className="space-y-4">
       <h1 className="text-3xl font-bold">{header}</h1>
-      <div>{children}</div>
+      <div className="space-y-4">{children}</div>
     </div>
   );
 };

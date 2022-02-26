@@ -15,17 +15,9 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
 
   useEffect(() => {
     setSidebarClass(
-      isMobileWidth &&
-        showSidebar &&
-        prevLayout?.isMobileWidth !== undefined &&
-        prevLayout?.showSidebar !== undefined
+      isMobileWidth && showSidebar
         ? '-translate-x-full slide-in'
-        : isMobileWidth &&
-          !showSidebar &&
-          prevLayout?.isMobileWidth !== undefined &&
-          prevLayout.isMobileWidth !== isMobileWidth &&
-          prevLayout?.showSidebar !== undefined &&
-          prevLayout.showSidebar !== showSidebar
+        : isMobileWidth && !showSidebar
         ? '-translate-x-full slide-out'
         : isMobileWidth
         ? '-translate-x-full'

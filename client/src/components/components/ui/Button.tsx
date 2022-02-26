@@ -30,38 +30,14 @@ const btnColorClass = {
   },
 };
 
-const btnDisabledClass = {
-  fill: {
-    primary: 'btn-primary-disabled',
-    secondary: 'btn-secondary-disabled',
-    success: 'btn-success-disabled',
-    warning: 'btn-warning-disabled',
-    danger: 'btn-danger-disabled',
-  },
-  outline: {
-    primary: 'btn-outline-primary-disabled',
-    secondary: 'btn-outline-secondary-disabled',
-    success: 'btn-outline-success-disabled',
-    warning: 'btn-outline-warning-disabled',
-    danger: 'btn-outline-danger-disabled',
-  },
-  text: {
-    primary: 'btn-text-primary-disabled',
-    secondary: 'btn-text-secondary-disabled',
-    success: 'btn-text-success-disabled',
-    warning: 'btn-text-warning-disabled',
-    danger: 'btn-text-danger-disabled',
-  },
-};
-
 interface ButtonProps {
   children: string | JSX.Element | JSX.Element[];
+  onClick?: Function;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'text' | 'outline' | 'fill';
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   disabled?: boolean;
   loading?: boolean;
-  onClick?: Function;
 }
 
 const Button = ({
@@ -71,17 +47,13 @@ const Button = ({
   disabled = false,
   loading = false,
   color = 'primary',
-  onClick,
+  onClick = () => alert('onClick not registered.'),
 }: ButtonProps) => {
   return (
     <button
-      onClick={() => {
-        if (onClick) onClick();
-      }}
+      onClick={() => onClick()}
       className={`${
-        disabled
-          ? btnDisabledClass[variant][color]
-          : btnColorClass[variant][color]
+        disabled ? 'btn-disabled' : btnColorClass[variant][color]
       } ${btnSizeClass[size]} inline-flex justify-center font-medium`}
       disabled={disabled}
     >

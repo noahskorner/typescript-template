@@ -7,7 +7,7 @@ const Variant = ({ header, children }: VariantProps) => {
   return (
     <div>
       <h6 className="font-bold text-xl">{header}</h6>
-      <div className="border border-primary p-4 flex flex-wrap items-center justify-center space-x-2 rounded-md">
+      <div className="border border-primary p-4 flex flex-wrap items-center justify-center gap-2 rounded-md">
         {children}
       </div>
     </div>
