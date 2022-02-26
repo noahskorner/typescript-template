@@ -57,7 +57,8 @@ const Button = ({
       } ${btnSizeClass[size]} inline-flex justify-center font-medium`}
       disabled={disabled}
     >
-      {loading ? <Spinner size={size} /> : children}
+      {loading && <Spinner size={size} className="absolute" />}
+      <div className={`${loading && 'opacity-0'}`}>{children}</div>
     </button>
   );
 };

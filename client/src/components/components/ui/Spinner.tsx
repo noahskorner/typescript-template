@@ -1,8 +1,9 @@
 interface SpinnerProps {
   size: 'sm' | 'md' | 'lg';
+  className?: string;
 }
 
-const Spinner = ({ size }: SpinnerProps) => {
+const Spinner = ({ size, className }: SpinnerProps) => {
   const getSpinnerSize = () => {
     switch (size) {
       case 'sm':
@@ -26,7 +27,7 @@ const Spinner = ({ size }: SpinnerProps) => {
   };
 
   return (
-    <div className={`${getSpinnerSize()} spinner`}>
+    <div className={`${getSpinnerSize()} ${className} spinner`}>
       <div className={getSpinnerDivSize()}></div>
       <div className={getSpinnerDivSize()}></div>
       <div className={getSpinnerDivSize()}></div>
