@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/index.css';
 import './assets/css/transitions.css';
-import './assets/css/spinner.css';
+import './assets/css/spinners.css';
 import './assets/css/buttons.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Components from './pages/Components';

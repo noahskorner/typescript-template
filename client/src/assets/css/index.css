@@ -6,6 +6,11 @@
 /* Inter Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --bg-b-primary: theme('colors.slate.900');
+}
+
 /* Fonts */
 .font-primary {
   font-family: var(--font-primary);
@@ -18,8 +23,17 @@ body {
 }
 
 :focus:not(:focus-visible) {
-  outline: 0;
+  outline: none;
   box-shadow: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+*:focus {
+  outline: none;
 }
 
 /* Tailwind Classes */
