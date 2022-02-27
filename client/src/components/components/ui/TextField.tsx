@@ -2,20 +2,17 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { ExclamationCircleIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
 import InputMask from 'inputmask';
+import { InputProps } from '../../../types/global';
 
-interface TextFieldProps {
-  value?: string | number;
+interface TextFieldProps extends InputProps {
   onInput?: Function;
   type?: 'text' | 'password' | 'textarea';
-  label?: string;
-  placeholder?: string;
-  errors?: Array<string>;
   mask?: string;
   icon?: JSX.Element;
 }
 
 const TextField = ({
-  value = '',
+  value,
   onInput = () => alert('onInput not registered.'),
   type = 'text',
   label,
@@ -84,10 +81,9 @@ const TextField = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder={placeholder && placeholder}
+            value={value}
             className="w-full p-2 bg-slate-50 dark:bg-slate-800 rounded-md"
-          >
-            {value}
-          </textarea>
+          ></textarea>
         )}
         {/* Trailing Icon */}
         {errors.length ? (

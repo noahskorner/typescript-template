@@ -1,5 +1,6 @@
 import useToggle from '../../../hooks/useToggle';
 import useWindowSize from '../../../hooks/useWindowSize';
+import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -23,11 +24,12 @@ const PageWrapper = (props: PageWrapperProps) => {
           className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-20 z-20"
         ></div>
       )}
-      <Header setShowSidebar={setShowSidebar} />
       <div className="w-full relative z-0">
+        <Header setShowSidebar={setShowSidebar} />
         <div className="w-full flex justify-center lg:pl-80 2xl:pr-80 pt-14">
           <div className="w-full max-w-3xl p-4">{props.children}</div>
         </div>
+        <Footer />
       </div>
     </div>
   );
