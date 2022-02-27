@@ -5,6 +5,7 @@ import InputMask from 'inputmask';
 import { InputProps } from '../../../types/global';
 
 interface TextFieldProps extends InputProps {
+  value?: string | number;
   onInput?: Function;
   type?: 'text' | 'password' | 'textarea';
   mask?: string;
@@ -41,7 +42,7 @@ const TextField = ({
           errors.length
             ? 'ring-1 ring-red-500'
             : isFocused
-            ? 'ring-1 ring-blue-500'
+            ? 'ring-1 ring-blue-600'
             : ''
         } w-full border shadow-sm bg-slate-50 dark:bg-slate-800 rounded-md flex justify-center items-center border-primary`}
       >
@@ -88,7 +89,7 @@ const TextField = ({
         {/* Trailing Icon */}
         {errors.length ? (
           <div className="pr-2 text-red-500">
-            <ExclamationCircleIcon className="w-5 h-4" />
+            <ExclamationCircleIcon className="w-4 h-4" />
           </div>
         ) : null}
       </div>

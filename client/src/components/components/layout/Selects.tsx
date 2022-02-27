@@ -24,21 +24,58 @@ const basicSelectOptions: Array<SelectOption> = [
     text: 'Option 5',
     value: 5,
   },
+  {
+    text: 'Option 6',
+    value: 6,
+  },
+  {
+    text: 'Option 7',
+    value: 7,
+  },
+  {
+    text: 'Option 8',
+    value: 8,
+  },
+  {
+    text: 'Option 9',
+    value: 9,
+  },
+  {
+    text: 'Option 10',
+    value: 10,
+  },
 ];
 
 const Selects = () => {
-  const [basicSelect, setBasicSelect] = useState<string | undefined>(undefined);
+  const [basicSelect, setBasicSelect] = useState<number | null>(null);
+  const [multiSelect, setMultiSelect] = useState<number[] | null>(null);
+  const [errorSelect, setErrorSelect] = useState<number | null>(null);
 
   return (
     <Component header="Selects">
       <Variant header="Basic Selects">
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2">
           <Select
-            placeholder="Placeholder"
+            placeholder="Select an option"
             label="Basic Select"
             options={basicSelectOptions}
             value={basicSelect}
             onSelect={setBasicSelect}
+          />
+          <Select
+            placeholder="Select an option"
+            label="Multi Select"
+            options={basicSelectOptions}
+            value={multiSelect}
+            onSelect={setMultiSelect}
+          />
+          <Select
+            placeholder="Select an option"
+            label="Basic Select"
+            options={basicSelectOptions}
+            value={errorSelect}
+            onSelect={setErrorSelect}
+            errors={['This is an error']}
           />
         </div>
       </Variant>

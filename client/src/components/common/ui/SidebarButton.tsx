@@ -28,13 +28,13 @@ const SidebarButton = ({ text, children }: SidebarButtonProps) => {
         className="sidebar-btn font-medium"
       >
         <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
           <h6>{text}</h6>
         </div>
         {showChildren ? (
-          <ChevronDownIcon className="w-4 h-4 text-blue-500" />
+          <ChevronDownIcon className="w-4 h-4 text-blue-600" />
         ) : (
-          <ChevronRightIcon className="w-4 h-4 text-blue-500" />
+          <ChevronRightIcon className="w-4 h-4 text-blue-600" />
         )}
       </button>
       <div

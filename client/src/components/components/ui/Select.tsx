@@ -1,5 +1,9 @@
 import { InputProps } from '../../../types/global';
-import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid';
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/solid';
 import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
@@ -9,8 +13,10 @@ export interface SelectOption {
 }
 
 interface SelectProps extends InputProps {
-  options: Array<SelectOption>;
+  value?: string | number | Array<string> | Array<number> | null;
   onSelect?: Function;
+  options: Array<SelectOption>;
+  type?: 'single' | 'multi';
 }
 
 const Select = ({
@@ -19,6 +25,7 @@ const Select = ({
   placeholder,
   errors = [],
   options,
+  type = 'single',
   onSelect = (value: string | number) =>
     alert(`onSelect not registered, ${value} selected.`),
 }: SelectProps) => {
@@ -33,12 +40,16 @@ const Select = ({
         onBlur={() => setShowOptions(false)}
         className={`${
           errors.length
-            ? 'ring-1 ring-red-500'
-            : 'focus:ring-1 focus:ring-blue-500'
+            ? 'ring-1 ring-red-500 focus:ring-1 focus:ring-red-500'
+            : 'focus:ring-1 focus:ring-blue-600'
         } w-full border shadow-sm bg-slate-50 dark:bg-slate-800 rounded-md flex justify-center items-center border-primary text-left`}
       >
         <div className="w-full bg-slate-50 dark:bg-slate-800 p-2 rounded-md">
-          {value ? value : placeholder ? placeholder : null}
+          {value ? (
+            value
+          ) : placeholder ? (
+            <p className="text-slate-400">{placeholder}</p>
+          ) : null}
         </div>
         <div className="h-full flex justify-center items-center text-slate-400">
           <div className="flex flex-col justify-center items-center px-2">
@@ -46,6 +57,12 @@ const Select = ({
             <ChevronDownIcon className="h-4 w-4" />
           </div>
         </div>
+        {/* Trailing Icon */}
+        {errors.length ? (
+          <div className="text-red-500 relative pr-2">
+            <ExclamationCircleIcon className="w-4 h-4" />
+          </div>
+        ) : null}
       </button>
       {/* Options */}
       <CSSTransition
@@ -54,14 +71,18 @@ const Select = ({
         classNames="fade-in"
         unmountOnExit
         children={
-          <div className="absolute w-full max-h-52 overflow-y-auto bg-slate-50 dark:bg-slate-800 py-2 rounded-md shadow-lg border border-primary">
+          <div className="absolute z-10 w-full max-h-52 overflow-y-auto bg-slate-50 dark:bg-slate-800 py-2 rounded-md shadow-lg border border-primary">
             {options.map((option) => {
               return (
                 <option
                   onClick={() => onSelect(option.value)}
                   key={option.value}
                   value={option.value}
-                  className="hover:bg-slate-100 dark:hover:bg-slate-700 p-2 cursor-pointer"
+                  className={`${
+                    option.value === value
+                      ? 'bg-blue-600'
+                      : 'hover:bg-slate-100 dark:hover:bg-slate-700'
+                  } p-2 cursor-pointer`}
                 >
                   {option.text}
                 </option>
