@@ -36,11 +36,17 @@ input:focus {
   outline: none;
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 /* Tailwind Classes */
 @layer components {
   /* Backgrounds */
   .bg-primary {
-    @apply bg-white dark:bg-slate-900;
+    @apply bg-gray-50 dark:bg-slate-900;
   }
 
   /* Buttons */

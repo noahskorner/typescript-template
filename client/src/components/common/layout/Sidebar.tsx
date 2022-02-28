@@ -1,7 +1,8 @@
 import useWindowSize from '../../../hooks/useWindowSize';
-import { sidebarBtns } from '../../../utils/constants';
+import { sidebarRoutes } from '../../../utils/constants';
 import SidebarButton from '../ui/SidebarButton';
 import { CSSTransition } from 'react-transition-group';
+import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   showSidebar: boolean;
@@ -9,6 +10,10 @@ interface SidebarProps {
 
 const Sidebar = ({ showSidebar }: SidebarProps) => {
   const { heightStr, isMobileWidth } = useWindowSize();
+  const navigate = useNavigate();
+  const handleSidebarRouteClick = (route: string | undefined) => {
+    if (route) navigate(route);
+  };
 
   return (
     <CSSTransition
@@ -23,14 +28,31 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
         >
           <div className="h-14 w-full px-2 lg:px-4 flex justify-end items-center border-b border-primary"></div>
           <div className="space-y-2 px-2 py-4 lg:px-4">
-            <h5 className="text-lg font-semibold">Components</h5>
-            {sidebarBtns.map((sidebarBtn, index) => {
+            {sidebarRoutes.map((sidebarRoute, index) => {
               return (
-                <SidebarButton
-                  text={sidebarBtn.text}
-                  children={sidebarBtn.children}
-                  key={index}
-                />
+                <div key={index}>
+                  <button
+                    onClick={() =>
+                      handleSidebarRouteClick(
+                        sidebarRoute.route && sidebarRoute.route
+                      )
+                    }
+                    className="p-2 hover:text-blue-600"
+                  >
+                    <h5 className="text-lg font-semibold">
+                      {sidebarRoute.name}
+                    </h5>
+                  </button>
+                  {sidebarRoute.buttons.map((button, index) => {
+                    return (
+                      <SidebarButton
+                        text={button.text}
+                        children={button.children}
+                        key={index}
+                      />
+                    );
+                  })}
+                </div>
               );
             })}
           </div>

@@ -1,40 +1,34 @@
 import { SidebarButtonProps } from '../components/common/ui/SidebarButton';
 
-export const sidebarBtns: Array<SidebarButtonProps> = [
+interface SidebarRoute {
+  name: string;
+  route?: string;
+  buttons: Array<SidebarButtonProps>;
+}
+export const sidebarRoutes: Array<SidebarRoute> = [
   {
-    text: 'Inputs',
-    children: [
+    name: 'Components',
+    route: '/',
+    buttons: [
       {
-        id: 'buttons',
-        text: 'Button',
+        text: 'Inputs',
+        children: [
+          {
+            text: 'Button',
+          },
+          {
+            text: 'Text Field',
+          },
+          {
+            text: 'Switch',
+          },
+        ],
       },
-      {
-        text: 'Checkbox',
-      },
-      {
-        text: 'Radio Button',
-      },
-      {
-        id: 'selects',
-        text: 'Select',
-      },
-      {
-        text: 'Slider',
-      },
-      {
-        text: 'Switch',
-      },
-      {
-        id: 'text-fields',
-        text: 'Text Field',
-      },
+      { text: 'Feedback', children: [{ text: 'Toast' }] },
     ],
   },
-  { text: 'Data Display' },
-  { text: 'Feedback' },
-  { text: 'Surfaces' },
-  { text: 'Navigation' },
-  { text: 'Layout' },
-  { text: 'Utils' },
-  { text: 'Data Grid' },
+  {
+    name: 'Pages',
+    buttons: [],
+  },
 ];
