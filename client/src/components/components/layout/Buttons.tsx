@@ -34,6 +34,11 @@ const Buttons = () => {
         <Button size="md" children={'Medium'} loading />
         <Button size="lg" children={'Large'} loading />
       </Variant>
+      <Variant header="Block">
+        <Button size="sm" children={'Small'} block />
+        <Button size="md" children={'Medium'} block />
+        <Button size="lg" children={'Large'} block />
+      </Variant>
     </Component>
   );
 };

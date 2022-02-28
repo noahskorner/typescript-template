@@ -38,6 +38,7 @@ interface ButtonProps {
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   disabled?: boolean;
   loading?: boolean;
+  block?: boolean;
 }
 
 const Button = ({
@@ -48,13 +49,16 @@ const Button = ({
   loading = false,
   color = 'primary',
   onClick = () => alert('onClick not registered.'),
+  block = false,
 }: ButtonProps) => {
   return (
     <button
       onClick={() => onClick()}
       className={`${
         disabled ? 'btn-disabled' : btnColorClass[variant][color]
-      } ${btnSizeClass[size]} inline-flex justify-center font-medium`}
+      } ${btnSizeClass[size]} ${
+        block ? 'w-full' : ''
+      } inline-flex justify-center font-medium`}
       disabled={disabled}
     >
       {loading && <Spinner size={size} className="absolute" />}

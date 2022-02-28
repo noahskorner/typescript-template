@@ -48,9 +48,7 @@ const basicSelectOptions: Array<SelectOption> = [
 
 const Selects = () => {
   const [basicSelect, setBasicSelect] = useState<number | null>(null);
-  const [multiSelect, setMultiSelect] = useState<number[]>([
-    1, 2, 3, 4, 5, 6, 7, 8, 9,
-  ]);
+  const [multiSelect, setMultiSelect] = useState<number | null>(null);
   const [errorSelect, setErrorSelect] = useState<number | null>(null);
 
   return (
