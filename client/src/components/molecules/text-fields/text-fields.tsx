@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Component from '../layout/Component';
-import Variant from '../layout/Variant';
-import TextField from '../ui/TextField';
+import Component from '../component';
+import Variant from '../variant';
+import TextField from '../../atoms/text-field';
 import { AtSymbolIcon } from '@heroicons/react/outline';
 
 const TextFields = () => {

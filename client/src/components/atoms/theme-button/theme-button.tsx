@@ -1,6 +1,6 @@
 import { SunIcon, MoonIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
-import IconButton from './IconButton';
+import IconButton from '../icon-button/icon-button';
 
 enum ThemeEnum {
   LIGHT,

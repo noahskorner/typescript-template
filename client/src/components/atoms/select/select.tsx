@@ -5,7 +5,7 @@ import {
   ExclamationCircleIcon,
   XIcon,
 } from '@heroicons/react/solid';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { isStringArray, isNumArray } from '../../../utils/functions';
 
@@ -79,7 +79,7 @@ const Select = ({
   };
 
   return (
-    <div className="relative w-full text-sm space-y-1">
+    <div className="relative w-full max-w-full text-sm space-y-1">
       {label && <label>{label}</label>}
       {/* Select */}
       <button
@@ -90,9 +90,12 @@ const Select = ({
           errors.length
             ? 'ring-1 ring-red-500 focus:ring-1 focus:ring-red-500'
             : 'focus:ring-1 focus:ring-blue-600'
-        } w-full border shadow-sm bg-white dark:bg-slate-800 rounded-md flex justify-center items-center border-primary text-left`}
+        } w-full max-w-full border shadow-sm bg-white dark:bg-slate-800 rounded-md flex justify-between items-center border-primary text-left`}
       >
-        <div className="w-full bg-white dark:bg-slate-800 p-2 rounded-md flex">
+        <div
+          className="w-full bg-white dark:bg-slate-800 p-2 rounded-md flex"
+          style={{ maxWidth: 'calc(100% - 2rem)' }}
+        >
           {!value ? (
             placeholder ? (
               <span className="text-slate-400">{placeholder}</span>
@@ -102,18 +105,15 @@ const Select = ({
           ) : type === 'single' ? (
             <span>{value}</span>
           ) : type === 'multi' && (value as Array<string | number>).length ? (
-            <div
-              className="w-full space-x-1 overflow-x-overlay flex"
-              style={{ maxWidth: '5rem' }}
-            >
-              {(value as Array<string | number>).map((item) => (
+            <div className="space-x-1 overflow-x-hidden flex multi-select-options">
+              {(value as Array<string | number>).map((item, index) => (
                 <span
                   onClick={() => selectOption(item)}
                   key={item}
                   className="px-1 space-x-3 bg-blue-600 text-white rounded multi-select-option flex justify-between items-center"
                 >
                   <span className="pl-1">{item}</span>
-                  <XIcon className="w-4" />
+                  <XIcon className="w-3" />
                 </span>
               ))}
             </div>

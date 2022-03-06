@@ -1,4 +1,4 @@
-import Spinner from './Spinner';
+import Spinner from '../spinner';
 
 const btnSizeClass = {
   sm: 'btn-sm',

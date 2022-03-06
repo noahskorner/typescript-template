@@ -5,8 +5,8 @@ import './assets/css/transitions.css';
 import './assets/css/spinners.css';
 import './assets/css/buttons.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Components from './pages/Components';
-import Login from './pages/Login';
+import Components from './pages/components';
+import Login from './pages/login';
 
 ReactDOM.render(
   <React.StrictMode>

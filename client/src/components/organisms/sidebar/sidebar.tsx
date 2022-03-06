@@ -1,6 +1,6 @@
 import useWindowSize from '../../../hooks/useWindowSize';
 import { sidebarRoutes } from '../../../utils/constants';
-import SidebarButton from '../ui/SidebarButton';
+import SidebarButton from '../../atoms/sidebar-button';
 import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 

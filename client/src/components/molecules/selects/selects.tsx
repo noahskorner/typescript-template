@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Component from '../layout/Component';
-import Variant from '../layout/Variant';
-import Select, { SelectOption } from '../ui/Select';
+import Component from '../../molecules/component';
+import Variant from '../../molecules/variant';
+import Select, { SelectOption } from '../../atoms/select';
 
 const basicSelectOptions: Array<SelectOption> = [
   {

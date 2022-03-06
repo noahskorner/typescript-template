@@ -1,6 +1,6 @@
 import { LoginIcon, MenuAlt1Icon } from '@heroicons/react/outline';
-import ThemeButton from '../ui/ThemeButton';
-import IconButton from '../ui/IconButton';
+import ThemeButton from '../../atoms/theme-button';
+import IconButton from '../../atoms/icon-button';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {

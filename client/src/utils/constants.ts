@@ -1,4 +1,4 @@
-import { SidebarButtonProps } from '../components/common/ui/SidebarButton';
+import { SidebarButtonProps } from '../components/atoms/sidebar-button';
 
 interface SidebarRoute {
   name: string;

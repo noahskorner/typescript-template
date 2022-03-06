@@ -1,14 +1,14 @@
 import useToggle from '../../../hooks/useToggle';
 import useWindowSize from '../../../hooks/useWindowSize';
-import Footer from './Footer';
-import Header from './Header';
-import Sidebar from './Sidebar';
+import Footer from '../../organisms/footer';
+import Header from '../../organisms/header';
+import Sidebar from '../../organisms/sidebar';
 
-interface PageWrapperProps {
+interface LayoutProps {
   children?: JSX.Element | JSX.Element[];
 }
 
-const PageWrapper = (props: PageWrapperProps) => {
+const Layout = (props: LayoutProps) => {
   const { isMobileWidth, heightStr } = useWindowSize();
   const { toggle: showSidebar, setToggle: setShowSidebar } = useToggle(false);
 
@@ -35,4 +35,4 @@ const PageWrapper = (props: PageWrapperProps) => {
   );
 };
 
-export default PageWrapper;
+export default Layout;
