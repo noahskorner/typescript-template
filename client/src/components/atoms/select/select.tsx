@@ -5,7 +5,7 @@ import {
   ExclamationCircleIcon,
   XIcon,
 } from '@heroicons/react/solid';
-import { useState } from 'react';
+import { useState, MouseEvent, FocusEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { isStringArray, isNumArray } from '../../../utils/functions';
 
@@ -69,23 +69,31 @@ const Select = ({
     }
   };
 
-  const handleSelectClick = (classList: DOMTokenList) => {
+  const handleSelectClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (type === 'single') setShowOptions(!showOptions);
     else {
-      const classListArr = Array.from(classList);
-      !classListArr.includes('multi-select-option') &&
+      const classListArr = Array.from(
+        (e.target as HTMLButtonElement).classList
+      );
+      if (!classListArr.includes('multi-select-option'))
         setShowOptions(!showOptions);
+      else if (!showOptions) setShowOptions(true);
     }
   };
 
+  const handleSelectBlur = (e: FocusEvent<HTMLDivElement>) => {
+    setShowOptions(false);
+  };
+
   return (
-    <div className="relative w-full max-w-full text-sm space-y-1">
+    <div
+      className="relative w-full max-w-full text-sm space-y-1"
+      onBlur={handleSelectBlur}
+    >
       {label && <label>{label}</label>}
       {/* Select */}
       <button
-        onClick={(e) =>
-          handleSelectClick((e.target as HTMLButtonElement).classList)
-        }
+        onMouseDown={handleSelectClick}
         className={`${
           errors.length
             ? 'ring-1 ring-red-500 focus:ring-1 focus:ring-red-500'
@@ -112,8 +120,8 @@ const Select = ({
                   key={item}
                   className="px-1 space-x-3 bg-blue-600 text-white rounded multi-select-option flex justify-between items-center"
                 >
-                  <span className="pl-1">{item}</span>
-                  <XIcon className="w-3" />
+                  <span className="pl-1 multi-select-option">{item}</span>
+                  <XIcon className="w-3 multi-select-option" />
                 </span>
               ))}
             </div>
