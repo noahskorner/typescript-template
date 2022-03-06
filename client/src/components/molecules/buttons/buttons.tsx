@@ -1,4 +1,3 @@
-import { isMobileBrowser } from '../../../utils/functions';
 import Button from '../../atoms/button';
 import Component from '../component';
 import Variant from '../variant';
@@ -6,7 +5,6 @@ import Variant from '../variant';
 const Buttons = () => {
   return (
     <Component header="Buttons">
-      <div>{JSON.stringify(isMobileBrowser())}</div>
       <Variant header="Basic Buttons">
         <Button color="primary" variant="fill" children={'Fill'} />
         <Button color="primary" variant="outline" children={'Outline'} />

@@ -80,6 +80,6 @@
 
   /* Disabled  */
   .btn-disabled {
-    @apply shadow-sm cursor-not-allowed border border-transparent bg-slate-200 text-slate-400 dark:bg-slate-700 dark:text-slate-500;
+    @apply cursor-not-allowed border border-transparent bg-gray-300 text-gray-400 dark:bg-slate-700 dark:text-slate-500;
   }
 }

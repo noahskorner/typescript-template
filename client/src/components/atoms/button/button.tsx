@@ -48,7 +48,7 @@ const Button = ({
   disabled = false,
   loading = false,
   color = 'primary',
-  onClick = () => alert('onClick not registered.'),
+  onClick = () => console.warn('onClick not registered.'),
   block = false,
 }: ButtonProps) => {
   return (
