@@ -147,9 +147,11 @@ const Select = ({
         in={showOptions}
         timeout={200}
         classNames="fade-in"
-        unmountOnExit
         children={
-          <div className="absolute z-10 w-full max-h-52 overflow-y-auto bg-white dark:bg-slate-800 py-2 rounded-md shadow-lg border border-primary">
+          <div
+            ref={optionsRef}
+            className="absolute z-10 w-full max-h-52 overflow-y-auto bg-white dark:bg-slate-800 py-2 rounded-md shadow-lg border border-primary"
+          >
             {options.map((option) => {
               return (
                 <option

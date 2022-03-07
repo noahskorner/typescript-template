@@ -26,6 +26,7 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
       unmountOnExit
       children={
         <div
+          ref={sidebarRef}
           className="sidebar"
           style={{ height: heightStr, maxHeight: heightStr }}
         >
