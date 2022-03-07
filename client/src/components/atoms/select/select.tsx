@@ -4,7 +4,7 @@ import {
   ExclamationCircleIcon,
   XIcon,
 } from '@heroicons/react/solid';
-import { useState, MouseEvent, FocusEvent } from 'react';
+import { useState, MouseEvent, FocusEvent, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { isStringArray, isNumArray } from '../../../utils/functions';
 
@@ -31,6 +31,7 @@ const Select = ({
     console.warn(`onSelect not registered, ${value} selected.`),
 }: SelectProps) => {
   const [showOptions, setShowOptions] = useState(false);
+  const optionsRef = useRef(null);
 
   const optionIsSelected = (option: string | number) => {
     if (type === 'single' && value === option) return true;
@@ -142,6 +143,7 @@ const Select = ({
       </button>
       {/* Options */}
       <CSSTransition
+        nodeRef={optionsRef}
         in={showOptions}
         timeout={200}
         classNames="fade-in"

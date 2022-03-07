@@ -3,12 +3,14 @@ import { sidebarRoutes } from '../../../utils/constants';
 import SidebarButton from '../../atoms/sidebar-button';
 import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 interface SidebarProps {
   showSidebar: boolean;
 }
 
 const Sidebar = ({ showSidebar }: SidebarProps) => {
+  const sidebarRef = useRef(null);
   const { heightStr, isMobileWidth } = useWindowSize();
   const navigate = useNavigate();
   const handleSidebarRouteClick = (route: string | undefined) => {
@@ -17,6 +19,7 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
 
   return (
     <CSSTransition
+      nodeRef={sidebarRef}
       in={!isMobileWidth || (isMobileWidth && showSidebar)}
       classNames="slide-in"
       timeout={400}
