@@ -2,6 +2,7 @@ import Layout from '../../components/templates/layout';
 import Buttons from '../../components/molecules/buttons';
 import Selects from '../../components/molecules/selects';
 import TextField from '../../components/molecules/text-fields';
+import Toasts from '../../components/molecules/toasts';
 
 const Components = () => {
   return (
@@ -10,6 +11,7 @@ const Components = () => {
         <Buttons />
         <TextField />
         <Selects />
+        <Toasts />
       </div>
     </Layout>
   );

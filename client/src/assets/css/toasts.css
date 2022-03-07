@@ -1,0 +1,22 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .toast-primary {
+    @apply bg-blue-600;
+  }
+  .toast-secondary {
+    @apply bg-slate-400 dark:bg-slate-800;
+  }
+  .toast-success {
+    @apply bg-green-500;
+  }
+  .toast-warning {
+    @apply bg-yellow-500;
+  }
+  .toast-danger {
+    @apply bg-red-500;
+  }
+}

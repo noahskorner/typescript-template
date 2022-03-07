@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/outline';
-import useToggle from '../../../hooks/useToggle';
+import { useState } from 'react';
 import { convertRemToPixels } from '../../../utils/functions';
 
 export interface SidebarButtonType {
@@ -13,7 +13,7 @@ export interface SidebarButtonProps {
 }
 
 const SidebarButton = ({ text, children }: SidebarButtonProps) => {
-  const { toggle: showChildren, setToggle: setShowChildren } = useToggle(false);
+  const [showChildren, setShowChildren] = useState(false);
 
   const scrollIntoView = (id: string) => {
     const element = document.getElementById(id);

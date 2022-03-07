@@ -1,12 +1,12 @@
 import Spinner from '../spinner';
 
-const btnSizeClass = {
+const BUTTON_SIZE_CLASSES = {
   sm: 'btn-sm',
   md: 'btn-md',
   lg: 'btn-lg',
 };
 
-const btnColorClass = {
+const BUTTON_COLOR_CLASSES = {
   fill: {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
@@ -55,8 +55,8 @@ const Button = ({
     <button
       onClick={() => onClick()}
       className={`${
-        disabled ? 'btn-disabled' : btnColorClass[variant][color]
-      } ${btnSizeClass[size]} ${
+        disabled ? 'btn-disabled' : BUTTON_COLOR_CLASSES[variant][color]
+      } ${BUTTON_SIZE_CLASSES[size]} ${
         block ? 'w-full' : ''
       } inline-flex justify-center font-medium`}
       disabled={disabled}

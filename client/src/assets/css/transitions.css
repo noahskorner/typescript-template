@@ -8,6 +8,16 @@
 .slide-in-enter-done {
   transform: translateX(0%);
 }
+.slide-in-appear {
+  transform: translateX(-100%);
+}
+.slide-in-appear-active {
+  transform: translateX(0%);
+  transition: 400ms;
+}
+.slide-in-appear-done {
+  transform: translateX(0%);
+}
 .slide-in-exit {
   transform: translateX(0%);
 }

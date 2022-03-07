@@ -4,6 +4,7 @@ import './assets/css/index.css';
 import './assets/css/transitions.css';
 import './assets/css/spinners.css';
 import './assets/css/buttons.css';
+import './assets/css/toasts.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Components from './pages/components';
 import Login from './pages/login';

@@ -1,7 +1,6 @@
 import { InputProps } from '../../../types/global';
 import {
-  ChevronUpIcon,
-  ChevronDownIcon,
+  SelectorIcon,
   ExclamationCircleIcon,
   XIcon,
 } from '@heroicons/react/solid';
@@ -29,7 +28,7 @@ const Select = ({
   options,
   type = 'single',
   setValue = (value: string | number) =>
-    alert(`onSelect not registered, ${value} selected.`),
+    console.warn(`onSelect not registered, ${value} selected.`),
 }: SelectProps) => {
   const [showOptions, setShowOptions] = useState(false);
 
@@ -113,7 +112,7 @@ const Select = ({
           ) : type === 'single' ? (
             <span>{value}</span>
           ) : type === 'multi' && (value as Array<string | number>).length ? (
-            <div className="space-x-1 overflow-x-hidden flex multi-select-options">
+            <div className="space-x-1 overflow-scroll scrollbar-hidden flex multi-select-options max-w-fit">
               {(value as Array<string | number>).map((item, index) => (
                 <span
                   onClick={() => selectOption(item)}
@@ -129,10 +128,9 @@ const Select = ({
             <span>&nbsp;</span>
           )}
         </div>
-        <div className="h-full flex flex-shrink-0 justify-center items-center text-slate-400">
+        <div className="h-full flex shrink-0 justify-center items-center text-slate-400">
           <div className="flex flex-col justify-center items-center px-2">
-            <ChevronUpIcon className="h-4 w-4" />
-            <ChevronDownIcon className="h-4 w-4" />
+            <SelectorIcon className="w-5" />
           </div>
         </div>
         {/* Trailing Icon */}
