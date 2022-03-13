@@ -1,12 +1,20 @@
 import useWindowSize from '../../hooks/useWindowSize';
 import TextField from '../../components/atoms/text-field/text-field';
 import Button from '../../components/atoms/button';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ToastManagerContext } from '../../contexts/toast-context';
 
 const Login = () => {
   const { widthStr, heightStr } = useWindowSize();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const toastContext = useContext(ToastManagerContext);
+
+  const handleLoginBtnClick = () => {
+    toastContext?.addToast({
+      title: 'Logging you in!',
+    });
+  };
 
   return (
     <div
@@ -22,7 +30,7 @@ const Login = () => {
             type="password"
             color="secondary"
           />
-          <Button children={'Login'} />
+          <Button onClick={handleLoginBtnClick} children={'Login'} />
         </div>
       </div>
       <div className="flex justify-center space-x-4 text-sm p-4">

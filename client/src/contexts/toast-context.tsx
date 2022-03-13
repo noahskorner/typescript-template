@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import ToastManager from '../components/organisms/toast-manager';
 import ToastInterface from '../types/toast';
 
 const TOAST_TIMEOUT = 5000; // 5s
@@ -49,6 +50,7 @@ export const ToastManagerProvider = ({
   return (
     <ToastManagerContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}
+      <ToastManager />
     </ToastManagerContext.Provider>
   );
 };

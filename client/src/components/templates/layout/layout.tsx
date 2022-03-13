@@ -2,7 +2,6 @@ import useWindowSize from '../../../hooks/useWindowSize';
 import Footer from '../../organisms/footer';
 import Header from '../../organisms/header';
 import Sidebar from '../../organisms/sidebar';
-import ToastManager from '../../organisms/toast-manager/toast-manager';
 import { useState } from 'react';
 interface LayoutProps {
   children?: JSX.Element | JSX.Element[];
@@ -15,7 +14,7 @@ const Layout = (props: LayoutProps) => {
   return (
     <div
       style={{ minHeight: heightStr }}
-      className="bg-primary flex text-primary relative"
+      className="bg-primary flex relative text-primary"
     >
       <Sidebar showSidebar={showSidebar} />
       {showSidebar && isMobileWidth && (
@@ -31,7 +30,6 @@ const Layout = (props: LayoutProps) => {
         </div>
         <Footer />
       </div>
-      <ToastManager />
     </div>
   );
 };
