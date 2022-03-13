@@ -7,27 +7,11 @@ const BUTTON_SIZE_CLASSES = {
 };
 
 const BUTTON_COLOR_CLASSES = {
-  fill: {
-    primary: 'btn-primary',
-    secondary: 'btn-secondary',
-    success: 'btn-success',
-    warning: 'btn-warning',
-    danger: 'btn-danger',
-  },
-  outline: {
-    primary: 'btn-outline-primary',
-    secondary: 'btn-outline-secondary',
-    success: 'btn-outline-success',
-    warning: 'btn-outline-warning',
-    danger: 'btn-outline-danger',
-  },
-  text: {
-    primary: 'btn-text-primary',
-    secondary: 'btn-text-secondary',
-    success: 'btn-text-success',
-    warning: 'btn-text-warning',
-    danger: 'btn-text-danger',
-  },
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  success: 'btn-success',
+  warning: 'btn-warning',
+  danger: 'btn-danger',
 };
 
 interface ButtonProps {
@@ -54,11 +38,9 @@ const Button = ({
   return (
     <button
       onClick={() => onClick()}
-      className={`${
-        disabled ? 'btn-disabled' : BUTTON_COLOR_CLASSES[variant][color]
-      } ${BUTTON_SIZE_CLASSES[size]} ${
-        block ? 'w-full' : ''
-      } inline-flex justify-center font-medium`}
+      className={`${disabled ? 'btn-disabled' : BUTTON_COLOR_CLASSES[color]} ${
+        BUTTON_SIZE_CLASSES[size]
+      } ${block ? 'w-full' : ''} inline-flex justify-center font-medium`}
       disabled={disabled}
     >
       {loading && <Spinner size={size} className="absolute" />}

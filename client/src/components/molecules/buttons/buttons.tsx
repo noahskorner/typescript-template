@@ -5,11 +5,6 @@ import Variant from '../variant';
 const Buttons = () => {
   return (
     <Component header="Buttons">
-      <Variant header="Basic Buttons">
-        <Button color="primary" variant="fill" children={'Fill'} />
-        <Button color="primary" variant="outline" children={'Outline'} />
-        <Button color="primary" variant="text" children={'Text'} />
-      </Variant>
       <Variant header="Sizes">
         <Button size="sm" children={'Small'} />
         <Button size="md" children={'Medium'} />
