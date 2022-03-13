@@ -2,7 +2,7 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { ExclamationCircleIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
 import InputMask from 'inputmask';
-import { InputProps } from '../../../types/global';
+import InputProps from '../../../types/input';
 import Errors from '../errors';
 
 interface TextFieldProps extends InputProps {

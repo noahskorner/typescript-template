@@ -1,4 +1,4 @@
-import { InputProps } from '../../../types/global';
+import InputProps from '../../../types/input';
 import {
   SelectorIcon,
   ExclamationCircleIcon,

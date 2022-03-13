@@ -1,4 +1,4 @@
-import { ToastInterface } from '../../../types/global';
+import ToastInterface from '../../../types/toast';
 import { MouseEvent, useContext } from 'react';
 import { ToastManagerContext } from '../../../contexts/toast-context';
 
