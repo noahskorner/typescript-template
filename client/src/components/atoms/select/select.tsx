@@ -7,6 +7,7 @@ import {
 import { useState, MouseEvent, FocusEvent, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { isStringArray, isNumArray } from '../../../utils/functions';
+import Errors from '../errors';
 
 export interface SelectOption {
   text: string;
@@ -167,18 +168,7 @@ const Select = ({
           </div>
         }
       />
-      {/* Errors */}
-      {errors.length ? (
-        <div>
-          {errors.map((error) => {
-            return (
-              <p key={error} className="text-red-500 font-medium">
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      ) : null}
+      <Errors errors={errors} />
     </div>
   );
 };

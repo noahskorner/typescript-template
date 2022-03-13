@@ -3,6 +3,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
 import InputMask from 'inputmask';
 import { InputProps } from '../../../types/global';
+import Errors from '../errors';
 
 interface TextFieldProps extends InputProps {
   value?: string | number;
@@ -102,18 +103,7 @@ const TextField = ({
           </div>
         ) : null}
       </div>
-      {/* Errors */}
-      {errors.length ? (
-        <div>
-          {errors.map((error) => {
-            return (
-              <p key={error} className="text-red-500 font-medium">
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      ) : null}
+      <Errors errors={errors} />
     </div>
   );
 };
