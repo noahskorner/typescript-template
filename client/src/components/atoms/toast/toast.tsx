@@ -21,12 +21,9 @@ const Toast = ({ id, color, title, body, actions }: ToastInterface) => {
   return (
     <div
       onClick={handleToastClick}
-      className="w-full rounded-md border border-inset border-primary bg-white dark:bg-slate-700 shadow-lg flex items-stretch pl-4 text-sm relative cursor-pointer"
+      className={`${TOAST_CLASSES[color]} w-full rounded-md bg-white dark:bg-slate-700 shadow-lg flex items-stretch text-sm relative cursor-pointer`}
     >
-      <div
-        className={`${TOAST_CLASSES[color]} w-4 absolute -top-[1px] -bottom-[1px]`}
-      ></div>
-      <div className="w-full pl-8 space-y-1 py-3">
+      <div className="w-full p-4 space-y-1">
         {title && <h6 className="font-medium">{title}</h6>}
         {body && <p className="text-slate-500 dark:text-slate-300">{body}</p>}
         <div className="max-w-fit flex flex-wrap justify-start items-start">
@@ -34,7 +31,7 @@ const Toast = ({ id, color, title, body, actions }: ToastInterface) => {
             return (
               <button
                 key={index}
-                className="text-blue-400 font-semibold hover:underline text-center pr-2 action"
+                className="text-blue-500 font-semibold hover:underline text-center pr-2 action"
                 onClick={() => a.action()}
               >
                 {a.label}

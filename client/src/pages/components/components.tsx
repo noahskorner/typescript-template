@@ -3,6 +3,7 @@ import Buttons from '../../components/molecules/buttons';
 import Selects from '../../components/molecules/selects';
 import TextField from '../../components/molecules/text-fields';
 import Toasts from '../../components/molecules/toasts';
+import Tables from '../../components/molecules/tables';
 
 const Components = () => {
   return (
@@ -12,6 +13,7 @@ const Components = () => {
         <TextField />
         <Selects />
         <Toasts />
+        <Tables />
       </div>
     </Layout>
   );

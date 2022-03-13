@@ -44,6 +44,11 @@ input:focus {
 
 /* Tailwind Classes */
 @layer components {
+  /* Text */
+  .text-primary {
+    @apply text-gray-700 dark:text-slate-200;
+  }
+
   /* Backgrounds */
   .bg-primary {
     @apply bg-white dark:bg-slate-900;

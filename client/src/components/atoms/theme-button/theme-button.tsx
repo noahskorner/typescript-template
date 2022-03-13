@@ -1,42 +1,28 @@
 import { SunIcon, MoonIcon } from '@heroicons/react/outline';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../contexts/theme-context';
+import ThemeEnum from '../../../enums/theme-enum';
 import IconButton from '../icon-button/icon-button';
 
-enum ThemeEnum {
-  LIGHT,
-  DARK,
-}
-
 const ThemeButton = () => {
-  const [theme, setTheme] = useState(() => {
-    try {
-      const storedTheme = localStorage.getItem('theme');
-      return storedTheme ? parseInt(storedTheme) : ThemeEnum.LIGHT;
-    } catch (error) {
-      return ThemeEnum.LIGHT;
-    }
-  });
+  const themeContext = useContext(ThemeContext);
 
-  useEffect(() => {
-    localStorage.setItem('theme', theme.toString());
-    const html = document.getElementsByTagName('html')[0];
-
-    if (theme === ThemeEnum.LIGHT && html.classList.contains('dark')) {
-      html.classList.remove('dark');
-    } else if (theme === ThemeEnum.DARK && !html.classList.contains('dark')) {
-      html.classList.add('dark');
-    }
-  }, [theme]);
-
-  return theme === ThemeEnum.LIGHT ? (
+  return (
     <IconButton
-      onClick={() => setTheme(ThemeEnum.DARK)}
-      icon={<SunIcon className="h-5 w-5" />}
-    />
-  ) : (
-    <IconButton
-      onClick={() => setTheme(ThemeEnum.LIGHT)}
-      icon={<MoonIcon className="h-5 w-5" />}
+      onClick={() =>
+        themeContext?.setTheme(
+          themeContext?.theme === ThemeEnum.LIGHT
+            ? ThemeEnum.DARK
+            : ThemeEnum.LIGHT
+        )
+      }
+      icon={
+        themeContext?.theme === ThemeEnum.LIGHT ? (
+          <SunIcon className="h-5 w-5" />
+        ) : (
+          <MoonIcon className="h-5 w-5" />
+        )
+      }
     />
   );
 };

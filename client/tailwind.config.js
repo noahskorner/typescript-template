@@ -6,6 +6,9 @@ module.exports = {
         container: '85rem',
         '1/2': '50%',
       },
+      borderWidth: {
+        6: '6px',
+      },
     },
   },
   plugins: [],

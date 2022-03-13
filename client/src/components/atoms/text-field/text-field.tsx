@@ -10,7 +10,13 @@ interface TextFieldProps extends InputProps {
   type?: 'text' | 'password' | 'textarea';
   mask?: string;
   icon?: JSX.Element;
+  color?: 'primary' | 'secondary';
 }
+
+const TEXT_FIELD_CLASSES = {
+  primary: 'bg-white dark:bg-slate-800',
+  secondary: 'bg-slate-50 dark:bg-slate-700',
+};
 
 const TextField = ({
   value,
@@ -21,6 +27,7 @@ const TextField = ({
   errors = [],
   mask,
   icon,
+  color = 'primary',
 }: TextFieldProps) => {
   const textFieldRef = useRef<any>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +51,9 @@ const TextField = ({
             : isFocused
             ? 'ring-1 ring-blue-600'
             : ''
-        } w-full border shadow-sm bg-white dark:bg-slate-800 rounded-md flex justify-center items-center border-primary`}
+        } ${
+          TEXT_FIELD_CLASSES[color]
+        } w-full border shadow-sm  rounded-md flex justify-center items-center border-primary`}
       >
         {/* Leading Icon */}
         <div className="pl-2 text-slate-400">{icon}</div>
@@ -58,7 +67,7 @@ const TextField = ({
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               value={value}
-              className="w-full bg-white dark:bg-slate-800 p-2 rounded-md"
+              className={`${TEXT_FIELD_CLASSES[color]} w-full p-2 rounded-md`}
               placeholder={placeholder && placeholder}
             />
             {type === 'password' && (

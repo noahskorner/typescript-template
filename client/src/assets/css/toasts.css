@@ -5,18 +5,18 @@
 
 @layer components {
   .toast-primary {
-    @apply bg-blue-600;
+    @apply border-y border-y-slate-900/10 dark:border-y-slate-300/10 border-r-slate-900/10 dark:border-r-slate-300/10 border-l-6 border-l-blue-600;
   }
   .toast-secondary {
-    @apply bg-slate-400 dark:bg-slate-800;
+    @apply border-y border-y-slate-900/10 dark:border-y-slate-300/10 border-r-slate-900/10 dark:border-r-slate-300/10 border-l-6 border-l-slate-400 dark:border-l-slate-800;
   }
   .toast-success {
-    @apply bg-green-500;
+    @apply border-y border-y-slate-900/10 dark:border-y-slate-300/10 border-r-slate-900/10 dark:border-r-slate-300/10 border-l-6 border-l-green-500;
   }
   .toast-warning {
-    @apply bg-yellow-500;
+    @apply border-y border-y-slate-900/10 dark:border-y-slate-300/10 border-r-slate-900/10 dark:border-r-slate-300/10 border-l-6 border-l-yellow-500;
   }
   .toast-danger {
-    @apply bg-red-500;
+    @apply border-y border-y-slate-900/10 dark:border-y-slate-300/10 border-r-slate-900/10 dark:border-r-slate-300/10 border-l-6 border-l-red-500;
   }
 }

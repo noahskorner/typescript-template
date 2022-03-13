@@ -70,15 +70,7 @@ const Select = ({
   };
 
   const handleSelectClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (type === 'single') setShowOptions(!showOptions);
-    else {
-      const classListArr = Array.from(
-        (e.target as HTMLButtonElement).classList
-      );
-      if (!classListArr.includes('multi-select-option'))
-        setShowOptions(!showOptions);
-      else if (!showOptions) setShowOptions(true);
-    }
+    setShowOptions(!showOptions);
   };
 
   const handleSelectBlur = (e: FocusEvent<HTMLDivElement>) => {
@@ -87,6 +79,7 @@ const Select = ({
 
   return (
     <div
+      tabIndex={0}
       className="relative w-full max-w-full text-sm space-y-1"
       onBlur={handleSelectBlur}
     >
@@ -147,6 +140,7 @@ const Select = ({
         in={showOptions}
         timeout={200}
         classNames="fade-in"
+        unmountOnExit
         children={
           <div
             ref={optionsRef}
