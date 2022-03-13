@@ -48,13 +48,7 @@ const Sidebar = ({ showSidebar }: SidebarProps) => {
                     </h5>
                   </button>
                   {sidebarRoute.buttons.map((button, index) => {
-                    return (
-                      <SidebarButton
-                        text={button.text}
-                        children={button.children}
-                        key={index}
-                      />
-                    );
+                    return <SidebarButton {...button} key={index} />;
                   })}
                 </div>
               );

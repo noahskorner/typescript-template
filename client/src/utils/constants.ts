@@ -29,6 +29,15 @@ export const sidebarRoutes: Array<SidebarRoute> = [
   },
   {
     name: 'Pages',
-    buttons: [],
+    buttons: [
+      {
+        text: 'Login',
+        path: '/login',
+      },
+      {
+        text: 'Register',
+        path: '/register',
+      },
+    ],
   },
 ];

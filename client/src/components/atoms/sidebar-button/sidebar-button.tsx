@@ -1,6 +1,7 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import { convertRemToPixels } from '../../../utils/functions';
+import { useNavigate } from 'react-router-dom';
 
 export interface SidebarButtonType {
   text: string;
@@ -9,11 +10,13 @@ export interface SidebarButtonType {
 
 export interface SidebarButtonProps {
   text: string;
+  path?: string;
   children?: Array<SidebarButtonType>;
 }
 
-const SidebarButton = ({ text, children }: SidebarButtonProps) => {
+const SidebarButton = ({ text, path, children }: SidebarButtonProps) => {
   const [showChildren, setShowChildren] = useState(false);
+  const navigate = useNavigate();
 
   const scrollIntoView = (id: string) => {
     const element = document.getElementById(id);
@@ -21,17 +24,22 @@ const SidebarButton = ({ text, children }: SidebarButtonProps) => {
     window.scrollBy(0, -convertRemToPixels(3.5));
   };
 
+  const handleSidebarBtnClick = () => {
+    if (!path) setShowChildren(!showChildren);
+    else navigate(path);
+  };
+
   return (
     <div>
       <button
-        onClick={() => setShowChildren(!showChildren)}
+        onClick={() => handleSidebarBtnClick()}
         className="sidebar-btn font-medium"
       >
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
           <h6>{text}</h6>
         </div>
-        {showChildren ? (
+        {!children ? null : showChildren ? (
           <ChevronDownIcon className="w-4 h-4 text-blue-600" />
         ) : (
           <ChevronRightIcon className="w-4 h-4 text-blue-600" />
